@@ -9,10 +9,11 @@
 		<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
 		<title><ui:insert name="titulo">Sistema de Pedidos de Venda</ui:insert></title>
 		<h:outputStylesheet library="css" name="sistema.css" />
+		<h:outputScript library="js" name="jquery.maskMoney.js" />
 	</h:head>
 	
 	<h:body>
-		<p:ajaxStatus styleClass="ajax-status">
+		<p:ajaxStatus styleClass="ajax-status" onsuccess="configurarMoeda()">
 			<f:facet name="start">
 				<h:graphicImage library="images" name="loading.gif"/>
 			</f:facet>
@@ -37,6 +38,16 @@
 		<footer>
 			Curso online de Sistemas Comerciais JavaEE, CDI, JPA e Primefaces
 		</footer>
+		
+		<script>
+			function configurarMoeda(){
+				$(".moeda").maskMoney({decimal: ",", thousands: ".", allowZero: true});
+			}
+
+			$(document).ready(function(){
+				configurarMoeda();
+			});
+		</script>
 
 	</h:body>
 </html>
