@@ -65,3 +65,11 @@ h1{
 	width: 35px;
 	height: 35px;
 }
+
+.ui-selectmanycheckbox td{
+	padding: 0px !important;
+}
+
+.ui-selectmanycheckbox td label{
+	padding-right: 10px !important;
+}
