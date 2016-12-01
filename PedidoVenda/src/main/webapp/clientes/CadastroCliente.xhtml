@@ -38,8 +38,40 @@
 				<p:inputMask id="cnpj" size="20"  maxlength="20" mask="99.999.999/9999-99"/>
 				
 				<p:outputLabel value="E-mail" for="email" />
-				<p:inputText id="email" size="30"  maxlength="40"/>
+				<p:inputText id="email" size="30"  maxlength="40"/>						
 			</p:panelGrid>
+			
+			<p:commandButton value="Adicionar endereço" style="margin-top: 10px"/>
+			
+			<p:dataTable id="enderecosTable" value="#{listagemEnderecosBean.enderecosFiltrados}" var="endereco"
+				style="margin-top: 10px" emptyMessage="Produto não encontrato." rows="10"
+				paginator="true" paginatorAlwaysVisible="false" paginatorPosition="bottom">
+				
+				<p:column headerText="Logradouro" >
+					<h:outputText value="Rua Parque Paraúna" />
+				</p:column>
+				
+				<p:column headerText="Número" style="width: 100px; text-align: right" >
+					<h:outputText value="79" />
+				</p:column>
+				
+				<p:column headerText="Complemento" style="width: 250px">
+					<h:outputText value="Loteamento Parque Verde" />
+				</p:column>
+				
+				<p:column headerText="CEP" style="text-align: center; width: 120px">
+					<h:outputText value="59.144-170" />
+				</p:column>
+				
+				<p:column headerText="Cidade/UF" >
+					<h:outputText value="Parnamirim/RN" />
+				</p:column>
+				
+				<p:column headerText="Opções" style="text-align: center; width: 100px">
+					<p:button icon="ui-icon-pencil" title="Editar"/>
+					<p:commandButton icon="ui-icon-trash" title="Excluir" />
+				</p:column>		
+			</p:dataTable>
 		</h:form>
 	</ui:define>
 </ui:composition>

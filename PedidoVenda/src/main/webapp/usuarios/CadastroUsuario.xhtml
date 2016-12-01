@@ -18,7 +18,7 @@
 				</p:toolbarGroup>
 				
 				<p:toolbarGroup align="right">
-					<p:button value="Pesquisa"/>
+					<p:button value="Pesquisa" outcome="/usuarios/PesquisaUsuarios"/>
 				</p:toolbarGroup>
 			</p:toolbar>
 			
@@ -34,7 +34,27 @@
 								
 				<p:outputLabel value="Senha" for="senha" />
 				<p:password id="senha" size="15"  maxlength="10"/>
+				
+				<p:selectOneMenu>
+					<f:selectItem itemLabel="Administradores" />
+				</p:selectOneMenu>
+				
+				<p:commandButton value="Adicionar grupo" />
 			</p:panelGrid>
+			
+			<p:dataTable id="gruposTable" value="#{listagemGruposBean.gruposFiltrados}" var="grupo"
+				style="margin-top: 10px" emptyMessage="Grupo não encontrato." rows="5"
+				paginator="true" paginatorAlwaysVisible="false" paginatorPosition="bottom">
+				
+				<p:column headerText="Grupo" >
+					<h:outputText value="Vendedores" />
+				</p:column>
+
+				<p:column headerText="Opções" style="text-align: center; width: 100px">
+					<p:button icon="ui-icon-pencil" title="Editar"/>
+					<p:commandButton icon="ui-icon-trash" title="Excluir" />
+				</p:column>		
+			</p:dataTable>	
 		</h:form>
 	</ui:define>
 </ui:composition>
