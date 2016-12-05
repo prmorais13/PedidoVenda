@@ -96,3 +96,7 @@ h1{
 	padding: 0px !important;
 }
 /* Customiza TabView - Fim */
+
+.semBorda tr, .semBorda td {
+	border: none !important;
+}
