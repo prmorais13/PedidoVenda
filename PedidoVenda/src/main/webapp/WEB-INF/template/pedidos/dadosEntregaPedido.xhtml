@@ -4,7 +4,8 @@
 	xmlns:h="http://java.sun.com/jsf/html"
 	xmlns:p="http://primefaces.org/ui">
 
-	<p:panelGrid columns="4" style="width: 100%; margin-top: 20px" columnClasses="rotulo, campo, rotulo, campo" >
+	<p:panelGrid columns="4" style="width: 100%; margin-top: 20px"
+		columnClasses="rotulo, campo, rotulo, campo" styleClass="panelGridSemBorda" >
 		<p:outputLabel value="Data da entrega" for="dataEntrega" />
 		<p:calendar id="dataEntrega" size="10" pattern="dd/MM/yyyy" />
 		

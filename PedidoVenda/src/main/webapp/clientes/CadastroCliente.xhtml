@@ -23,7 +23,7 @@
 			</p:toolbar>
 			
 			<p:panelGrid columns="2" id="painel" style="width: 100%; margin-top: 20px"
-				columnClasses="rotulo, campo" styleClass="semBorda" >
+				columnClasses="rotulo, campo" styleClass="panelGridSemBorda" >
 				
 				<p:outputLabel value="Nome" for="nome" />
 				<p:inputText id="nome" size="60"  maxlength="80"/>
@@ -41,7 +41,8 @@
 				<p:inputText id="email" size="30"  maxlength="40"/>						
 			</p:panelGrid>
 			
-			<p:commandButton value="Adicionar endereço" style="margin-top: 10px"/>
+			<p:commandButton value="Adicionar endereço" style="margin-top: 10px"
+				oncomplete="PF('dlgEndereco').show()"/>
 			
 			<p:dataTable id="enderecosTable" value="#{listagemEnderecosBean.enderecosFiltrados}" var="endereco"
 				style="margin-top: 10px" emptyMessage="Produto não encontrato." rows="10"
@@ -69,9 +70,55 @@
 				
 				<p:column headerText="Opções" style="text-align: center; width: 100px">
 					<p:button icon="ui-icon-pencil" title="Editar"/>
-					<p:commandButton icon="ui-icon-trash" title="Excluir" />
+					<p:commandButton icon="ui-icon-trash" title="Excluir"
+						oncomplete="PF('confirmacaoExclusao').show();" />
 				</p:column>		
 			</p:dataTable>
+			
+			<p:dialog header="Inclusão de endereço" resizable="false" modal="true" widgetVar="dlgEndereco" >
+				<p:panelGrid columns="2" styleClass="panelGridSemBorda" >
+					
+					<p:outputLabel value="Logradouro" for="logradouro" />
+					<p:inputText id="logradouro" size="50"/>
+					
+					<p:outputLabel value="Número" for="numero" />
+					<p:inputText id="numero" size="10"/>
+					
+					<p:outputLabel value="Complemento" for="complemento" />
+					<p:inputText id="complemento" size="30"/>
+					
+					<p:outputLabel value="CEP" for="cep" />
+					<p:inputMask id="cep" mask="99.999-999" size="10" />
+					
+					<p:outputLabel value="Cidade" for="cidade" />
+					
+					<p:panelGrid columns="3" styleClass="semPadding"
+						style="padding-left: 0px;" >
+						
+						<p:inputText id="cidade" size="30" />
+						
+						<p:outputLabel value="UF" for="uf" />
+						<p:selectOneMenu id="uf" >
+							<f:selectItem itemLabel="Selecione" />
+							<f:selectItem itemLabel="AL" itemValue="AL" />
+							<f:selectItem itemLabel="PB" itemValue="PB" />
+							<f:selectItem itemLabel="CE" itemValue="CE"/>
+							<f:selectItem itemLabel="RN" itemValue="RN"/>
+						</p:selectOneMenu>
+					</p:panelGrid>
+					
+					<p:outputLabel />
+					<p:commandButton value="Incluir" oncomplete="PF('dlgEndereco').hide(); return false" />
+				</p:panelGrid>
+			</p:dialog>
+			
+			<p:confirmDialog header="Exclusão de endereço" message="Tem certeza que deseja excluir o endereço?"
+				widgetVar="confirmacaoExclusao" closable="false" >
+				
+				<p:button value="Não" onclick="PF('confirmacaoExclusao').hide(); return false;" />
+				<p:commandButton value="Sim" oncomplete="PF('confirmacaoExclusao').hide();" />
+			
+			</p:confirmDialog>
 		</h:form>
 	</ui:define>
 </ui:composition>

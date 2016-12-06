@@ -23,7 +23,7 @@
 			</p:toolbar>
 			
 			<p:panelGrid columns="2" id="painel" style="width: 100%; margin-top: 20px"
-				columnClasses="rotulo, campo" >
+				columnClasses="rotulo, campo" styleClass="panelGridSemBorda" >
 				
 				<p:outputLabel value="Nome" for="nome" />
 				<p:inputText id="nome" size="50"  maxlength="60"/>			
@@ -52,9 +52,18 @@
 
 				<p:column headerText="Opções" style="text-align: center; width: 100px">
 					<p:button icon="ui-icon-pencil" title="Editar"/>
-					<p:commandButton icon="ui-icon-trash" title="Excluir" />
+					<p:commandButton icon="ui-icon-trash" title="Excluir"
+						oncomplete="PF('confirmacaoExclusao').show();" />
 				</p:column>		
-			</p:dataTable>	
+			</p:dataTable>
+			
+			<p:confirmDialog header="Exclusão de grupo" message="Tem certeza que deseja excluir o grupo?"
+				widgetVar="confirmacaoExclusao" closable="false" >
+				
+				<p:button value="Não" onclick="PF('confirmacaoExclusao').hide(); return false;" />
+				<p:commandButton value="Sim" oncomplete="PF('confirmacaoExclusao').hide();" />
+			
+			</p:confirmDialog>
 		</h:form>
 	</ui:define>
 </ui:composition>
