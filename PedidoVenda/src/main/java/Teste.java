@@ -32,6 +32,8 @@ public class Teste {
 		endereco.setUf("RN");
 		endereco.setCliente(cliente);
 		
+		cliente.getEnderecos().add(endereco);
+		
 		manager.persist(cliente);
 		
 		trx.commit();
