@@ -3,16 +3,27 @@ package com.prmorais.model;
 import java.io.Serializable;
 import java.math.BigDecimal;
 
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.ManyToOne;
+
+@Entity
 public class Produto implements Serializable {
 
 	private static final long serialVersionUID = 1L;
 
 	private Long id;
 	private String sku;
+	private String nome;
 	private BigDecimal valorUnitario;
 	private Integer quantidadeEstoque;
 	private Categoria categoria;
 
+	@Id
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	public Long getId() {
 		return id;
 	}
@@ -21,6 +32,7 @@ public class Produto implements Serializable {
 		this.id = id;
 	}
 
+	@Column(nullable = false, length = 20, unique = true)
 	public String getSku() {
 		return sku;
 	}
@@ -29,6 +41,16 @@ public class Produto implements Serializable {
 		this.sku = sku;
 	}
 
+	@Column(nullable = false, length = 60)
+	public String getNome() {
+		return nome;
+	}
+
+	public void setNome(String nome) {
+		this.nome = nome;
+	}
+
+	@Column(name = "valor_unitario", nullable = false, precision = 10, scale = 2)
 	public BigDecimal getValorUnitario() {
 		return valorUnitario;
 	}
@@ -37,6 +59,7 @@ public class Produto implements Serializable {
 		this.valorUnitario = valorUnitario;
 	}
 
+	@Column(name = "quantidade_estoque", nullable = false)
 	public Integer getQuantidadeEstoque() {
 		return quantidadeEstoque;
 	}
@@ -45,6 +68,7 @@ public class Produto implements Serializable {
 		this.quantidadeEstoque = quantidadeEstoque;
 	}
 
+	@ManyToOne
 	public Categoria getCategoria() {
 		return categoria;
 	}
