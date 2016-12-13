@@ -66,9 +66,9 @@ public class Teste {
 		produto.setSku("GUA00123");
 		produto.setValorUnitario(new BigDecimal(2.21));
 
-		manager.persist(produto);
+		manager.persist(produto);*/
 
-		trx.commit();*/
+		//trx.commit();
 
 	}
 

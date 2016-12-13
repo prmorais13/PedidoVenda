@@ -71,7 +71,7 @@
 			<scope>compile</scope>
 		</dependency>
 		
-		<!-- Implementação hibernate -->
+		<!-- Núcleo do Hibernate -->
 		<dependency>
 			<groupId>org.hibernate</groupId>
 			<artifactId>hibernate-core</artifactId>
@@ -83,6 +83,15 @@
 			<groupId>org.hibernate</groupId>
 			<artifactId>hibernate-entitymanager</artifactId>
 			<version>5.2.4.Final</version>
+			<scope>compile</scope>
+		</dependency>
+		
+		<!-- Implementação do Bean Validator -->
+		<dependency>
+			<groupId>org.hibernate</groupId>
+			<artifactId>hibernate-validator</artifactId>
+			<version>5.3.4.Final</version>
+			<scope>compile</scope>
 		</dependency>
 		
 		<!-- Implementação MySQL -->
