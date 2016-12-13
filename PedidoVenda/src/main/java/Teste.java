@@ -1,12 +1,7 @@
-import java.math.BigDecimal;
-
 import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
 import javax.persistence.EntityTransaction;
 import javax.persistence.Persistence;
-
-import com.prmorais.model.Categoria;
-import com.prmorais.model.Produto;
 
 public class Teste {
 
@@ -45,7 +40,7 @@ public class Teste {
 		 * u.getGrupos().add(g);
 		 * 
 		 * manager.persist(u);
-		 */
+		 
 
 		// instanciamos a categoria pai (Bebidas)
 		Categoria categoriaPai = new Categoria();
@@ -73,7 +68,7 @@ public class Teste {
 
 		manager.persist(produto);
 
-		trx.commit();
+		trx.commit();*/
 
 	}
 
