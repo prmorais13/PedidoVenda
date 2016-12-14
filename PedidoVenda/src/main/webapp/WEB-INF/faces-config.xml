@@ -11,6 +11,7 @@
 	</factory>
 
 	<application>
+		<message-bundle>com.algaworks.pedidovenda.messages</message-bundle>
 		<locale-config>
 			<default-locale>pt_BR</default-locale>
 		</locale-config>

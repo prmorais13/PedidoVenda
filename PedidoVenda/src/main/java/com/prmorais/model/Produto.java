@@ -70,7 +70,9 @@ public class Produto implements Serializable {
 		this.valorUnitario = valorUnitario;
 	}
 
-	@NotNull @Min(0) @Max(9999)
+	@NotNull
+	@Min(value = 0, message = "tem que ser maior ou igual a zero.")
+	@Max(value = 9999, message = "tem um valor muito alto.")
 	@Column(name = "quantidade_estoque", nullable = false)
 	public Integer getQuantidadeEstoque() {
 		return quantidadeEstoque;
