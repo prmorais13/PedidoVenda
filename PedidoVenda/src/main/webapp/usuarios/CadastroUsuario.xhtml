@@ -11,29 +11,32 @@
 		<h:form id="frm">
 			<h1>Novo usuário</h1>
 			
+			<p:messages autoUpdate="false"  closable="true"/>
+			
 			<p:toolbar style="margin-top: 20px">
 				<p:toolbarGroup>
 					<p:button value="Cadastro" outcome="/usuarios/CadastroUsuario" />
-					<p:commandButton value="Salvar" id="botaoSalvar" />
+					<p:commandButton value="Salvar" id="botaoSalvar" action="#{cadastroUsuarioBean.salvar}"
+						process="@this painelUsuario" update="@form" />
 				</p:toolbarGroup>
 				
 				<p:toolbarGroup align="right">
-					<p:button value="Pesquisa" outcome="/usuarios/PesquisaUsuarios"/>
+					<p:button value="Pesquisa" outcome="/usuarios/PesquisaUsuarios" />
 				</p:toolbarGroup>
 			</p:toolbar>
 			
-			<p:panelGrid columns="2" id="painel" style="width: 100%; margin-top: 20px"
+			<p:panelGrid id="painelUsuario" columns="2" style="width: 100%; margin-top: 20px"
 				columnClasses="rotulo, campo" styleClass="panelGridSemBorda" >
 				
 				<p:outputLabel value="Nome" for="nome" />
-				<p:inputText id="nome" size="50"  maxlength="60"/>			
+				<p:inputText id="nome" size="50"  maxlength="110" value="#{cadastroUsuarioBean.usuario.nome}" />			
 				
 				<p:outputLabel value="E-mail" for="email" />
-				<p:inputText id="email" size="50"  maxlength="50"/>
+				<p:inputText id="email" size="50"  maxlength="150" value="#{cadastroUsuarioBean.usuario.email}" />
 				
 								
 				<p:outputLabel value="Senha" for="senha" />
-				<p:password id="senha" size="15"  maxlength="10"/>
+				<p:password id="senha" size="15"  maxlength="50" value="#{cadastroUsuarioBean.usuario.senha}" />
 				
 				<p:selectOneMenu>
 					<f:selectItem itemLabel="Administradores" />

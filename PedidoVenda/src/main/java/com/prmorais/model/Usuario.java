@@ -13,6 +13,10 @@ import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.JoinTable;
 import javax.persistence.ManyToMany;
+import javax.validation.constraints.Size;
+
+import org.hibernate.validator.constraints.Email;
+import org.hibernate.validator.constraints.NotBlank;
 
 @Entity
 public class Usuario implements Serializable {
@@ -35,6 +39,8 @@ public class Usuario implements Serializable {
 		this.id = id;
 	}
 
+	@NotBlank
+	@Size(max = 100, message = "deve ter no máximo 10 caracteres.")
 	@Column(nullable = false, length = 100)
 	public String getNome() {
 		return nome;
@@ -44,7 +50,10 @@ public class Usuario implements Serializable {
 		this.nome = nome;
 	}
 
-	@Column(nullable = false, length = 150, unique = true)
+	@NotBlank
+	@Size(max = 60, message = "deve ter no máximo 60 caracteres.")
+	@Email
+	@Column(nullable = false, length = 60, unique = true)
 	public String getEmail() {
 		return email;
 	}
@@ -53,6 +62,8 @@ public class Usuario implements Serializable {
 		this.email = email;
 	}
 
+	@NotBlank
+	@Size(min = 4, max = 50)
 	@Column(nullable = false, length = 50)
 	public String getSenha() {
 		return senha;

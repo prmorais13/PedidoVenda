@@ -13,6 +13,11 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.OneToMany;
+import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Size;
+
+import org.hibernate.validator.constraints.Email;
+import org.hibernate.validator.constraints.NotBlank;
 
 @Entity
 public class Cliente implements Serializable {
@@ -36,6 +41,8 @@ public class Cliente implements Serializable {
 		this.id = id;
 	}
 
+	@NotBlank
+	@Size(max = 100, message = "deve ter no máximo 100 caracteres.")
 	@Column(nullable = false, length = 100)
 	public String getNome() {
 		return nome;
@@ -45,6 +52,8 @@ public class Cliente implements Serializable {
 		this.nome = nome;
 	}
 
+	@NotBlank
+	@Email
 	@Column(nullable = false)
 	public String getEmail() {
 		return email;
@@ -54,6 +63,7 @@ public class Cliente implements Serializable {
 		this.email = email;
 	}
 
+	@NotBlank
 	@Column(name = "doc_receita_federal", nullable = false, length = 14)
 	public String getDocumentoReceitaFederal() {
 		return documentoReceitaFederal;
@@ -63,6 +73,7 @@ public class Cliente implements Serializable {
 		this.documentoReceitaFederal = documentoReceitaFederal;
 	}
 
+	@NotNull
 	@Enumerated(EnumType.STRING)
 	@Column(nullable = false, length = 10)
 	public TipoPessoa getTipo() {

@@ -1,23 +1,39 @@
 package com.prmorais.controller;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 
-import javax.faces.bean.ManagedBean;
-import javax.faces.bean.RequestScoped;
+import javax.faces.view.ViewScoped;
+import javax.inject.Named;
+
+import com.prmorais.model.Endereco;
 
 
-@ManagedBean
-@RequestScoped
-public class ListagemEnderecosBean {
+@Named
+@ViewScoped
+public class ListagemEnderecosBean implements Serializable {
 
+	private static final long serialVersionUID = 1L;
+	
 	private List<Integer> enderecosFiltrados;
+	private Endereco endereco;
 	
 	public ListagemEnderecosBean(){
+		this.endereco = new Endereco();
+		
 		enderecosFiltrados = new ArrayList<>();
 		for (int i = 0; i < 10; i++) {
 			enderecosFiltrados.add(i);
 		}
+	}
+	
+	public void salvar(){
+		
+	}
+	
+	public Endereco getEndereco() {
+		return endereco;
 	}
 	
 	public List<Integer> getEnderecosFiltrados() {

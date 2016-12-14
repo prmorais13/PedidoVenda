@@ -9,6 +9,10 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
+import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Size;
+
+import org.hibernate.validator.constraints.NotBlank;
 
 @Entity
 public class Endereco implements Serializable {
@@ -34,6 +38,8 @@ public class Endereco implements Serializable {
 		this.id = id;
 	}
 
+	@NotBlank
+	@Size(max = 150, message = "deve ter no máximo 150 caracteres.")
 	@Column(nullable = false, length = 150)
 	public String getLogradouro() {
 		return logradouro;
@@ -43,6 +49,8 @@ public class Endereco implements Serializable {
 		this.logradouro = logradouro;
 	}
 
+	@NotBlank
+	@Size(max = 20, message = "deve ter no máximo 20 caracteres.")
 	@Column(nullable = false, length = 20)
 	public String getNumero() {
 		return numero;
@@ -52,6 +60,7 @@ public class Endereco implements Serializable {
 		this.numero = numero;
 	}
 
+	@Size(max = 150, message = "deve ter no máximo 150 caracteres.")
 	@Column(length = 150)
 	public String getComplemento() {
 		return complemento;
@@ -61,6 +70,8 @@ public class Endereco implements Serializable {
 		this.complemento = complemento;
 	}
 
+	@NotBlank
+	@Size(max = 60, message = "deve ter no máximo 60 caracteres.")
 	@Column(nullable = false, length = 60)
 	public String getCidade() {
 		return cidade;
@@ -70,6 +81,8 @@ public class Endereco implements Serializable {
 		this.cidade = cidade;
 	}
 
+	@NotBlank
+	@Size(max = 60, message = "deve ter no máximo 60 caracteres.")
 	@Column(nullable = false, length = 60)
 	public String getUf() {
 		return uf;
@@ -79,6 +92,8 @@ public class Endereco implements Serializable {
 		this.uf = uf;
 	}
 
+	@NotBlank
+	@Size(max = 9, message = "deve ter no máximo 9 caracteres.")
 	@Column(nullable = false, length = 9)
 	public String getCep() {
 		return cep;
@@ -88,8 +103,9 @@ public class Endereco implements Serializable {
 		this.cep = cep;
 	}
 
+	@NotNull
 	@ManyToOne
-	@JoinColumn(name = "clinete_id", nullable = false)
+	@JoinColumn(name = "cliente_id", nullable = false)
 	public Cliente getCliente() {
 		return cliente;
 	}

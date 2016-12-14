@@ -17,6 +17,8 @@ import javax.validation.constraints.Size;
 
 import org.hibernate.validator.constraints.NotBlank;
 
+import com.prmorais.validation.SKU;
+
 @Entity
 public class Produto implements Serializable {
 
@@ -39,14 +41,14 @@ public class Produto implements Serializable {
 		this.id = id;
 	}
 
-	@NotBlank
+	@NotBlank @SKU
 	@Column(nullable = false, length = 20, unique = true)
 	public String getSku() {
 		return sku;
 	}
 
 	public void setSku(String sku) {
-		this.sku = sku;
+		this.sku = sku == null ? null : sku.toUpperCase();
 	}
 
 	@NotBlank
