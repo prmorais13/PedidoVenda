@@ -51,7 +51,7 @@ public class Categoria implements Serializable {
 	public void setSubCategorias(List<Categoria> subCategorias) {
 		this.subCategorias = subCategorias;
 	}
-	
+
 	@ManyToOne
 	@JoinColumn(name = "categoria_pai_id")
 	public Categoria getCategoriaPai() {
@@ -85,6 +85,11 @@ public class Categoria implements Serializable {
 		} else if (!id.equals(other.id))
 			return false;
 		return true;
+	}
+
+	@Override
+	public String toString() {
+		return "Categoria [id=" + id + "]";
 	}
 
 }
