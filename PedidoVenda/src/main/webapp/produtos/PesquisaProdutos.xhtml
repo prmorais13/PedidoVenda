@@ -63,7 +63,7 @@
 				
 				<p:column headerText="Opções" style="text-align: center; width: 100px">
 					<p:button icon="ui-icon-pencil" title="Editar" outcome="/produtos/CadastroProduto" >
-						<o:param name="produto" value="#{produto}" />
+						<o:param name="p" value="#{produto.id}" />
 					</p:button>
 					<p:commandButton icon="ui-icon-trash" title="Excluir" oncomplete="PF('confirmacaoExclusao').show();" />
 				</p:column>		

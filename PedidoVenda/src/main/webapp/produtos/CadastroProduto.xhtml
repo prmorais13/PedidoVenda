@@ -10,7 +10,7 @@
 	<ui:define name="corpo">
 		
 		<f:metadata>
-			<o:viewParam name="produto" value="#{cadastroProdutoBean.produto}" />
+			<o:viewParam name="p" value="#{cadastroProdutoBean.produto}" />
 			<f:viewAction action="#{cadastroProdutoBean.inicializar}" />
 		</f:metadata>
 	
@@ -22,8 +22,8 @@
 			<p:toolbar style="margin-top: 20px">
 				<p:toolbarGroup>
 					<p:button value="Cadastro" outcome="/produtos/CadastroProduto" />
-					<p:commandButton value="Salvar" id="botaoSalvar" action="#{cadastroProdutoBean.salvar}"
-						process="@this painelProduto" update="@form"/>
+					<p:commandButton value="Salvar" id="botaoSalvar"
+						action="#{cadastroProdutoBean.salvar}" update="@form"/>
 				</p:toolbarGroup>
 				
 				<p:toolbarGroup align="right">
