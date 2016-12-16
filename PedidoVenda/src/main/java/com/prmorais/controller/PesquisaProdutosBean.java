@@ -1,26 +1,42 @@
 package com.prmorais.controller;
 
-import java.util.ArrayList;
+import java.io.Serializable;
 import java.util.List;
 
-import javax.faces.bean.ManagedBean;
-import javax.faces.bean.RequestScoped;
+import javax.faces.view.ViewScoped;
+import javax.inject.Inject;
+import javax.inject.Named;
+
+import com.prmorais.model.Produto;
+import com.prmorais.repository.Produtos;
+import com.prmorais.repository.filter.ProdutoFilter;
 
 
-@ManagedBean
-@RequestScoped
-public class PesquisaProdutosBean {
+@Named
+@ViewScoped
+public class PesquisaProdutosBean implements Serializable{
 
-	private List<Integer> produtosFiltrados;
+	private static final long serialVersionUID = 1L;
+
+	@Inject
+	private Produtos produtos;
+	
+	private List<Produto> produtosFiltrados;
+	private ProdutoFilter filtro;
 	
 	public PesquisaProdutosBean(){
-		produtosFiltrados = new ArrayList<>();
-		for (int i = 0; i < 50; i++) {
-			produtosFiltrados.add(i);
-		}
+		this.filtro = new ProdutoFilter();
 	}
 	
-	public List<Integer> getProdutosFiltrados() {
+	public void pesquisar(){
+		this.produtosFiltrados = produtos.filtrados(filtro);
+	}
+	
+	public List<Produto> getProdutosFiltrados() {
 		return produtosFiltrados;
+	}
+	
+	public ProdutoFilter getFiltro() {
+		return filtro;
 	}
 }

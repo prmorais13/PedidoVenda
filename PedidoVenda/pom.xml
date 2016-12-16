@@ -64,12 +64,6 @@
 			<scope>compile</scope>
 		</dependency>
 		
-		<dependency>
-			<groupId>commons-logging</groupId>
-			<artifactId>commons-logging</artifactId>
-			<version>1.2</version>
-			<scope>compile</scope>
-		</dependency>
 		
 		<!-- Núcleo do Hibernate -->
 		<dependency>
@@ -107,6 +101,22 @@
 			<groupId>org.omnifaces</groupId>
 			<artifactId>omnifaces</artifactId>
 			<version>2.5.1</version>
+			<scope>compile</scope>
+		</dependency>
+		
+		<!-- Commons logging (abstrai a implementação de logging -->
+		<dependency>
+			<groupId>commons-logging</groupId>
+			<artifactId>commons-logging</artifactId>
+			<version>1.2</version>
+			<scope>compile</scope>
+		</dependency>
+		
+		<!-- commons lang (utilidades) -->
+		<dependency>
+			<groupId>org.apache.commons</groupId>
+			<artifactId>commons-lang3</artifactId>
+			<version>3.5</version>
 			<scope>compile</scope>
 		</dependency>
 	</dependencies>
