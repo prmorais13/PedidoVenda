@@ -96,7 +96,7 @@
 			<scope>compile</scope>
 		</dependency>
 		
-		<!-- Implementação Omnifaces -->
+		<!-- Omnifaces(Utilitário para JSF) -->
 		<dependency>
 			<groupId>org.omnifaces</groupId>
 			<artifactId>omnifaces</artifactId>

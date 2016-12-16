@@ -3,7 +3,8 @@
 	xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
 	xmlns:f="http://xmlns.jcp.org/jsf/core"
 	xmlns:h="http://xmlns.jcp.org/jsf/html"
-	xmlns:p="http://primefaces.org/ui">
+	xmlns:p="http://primefaces.org/ui"
+	xmlns:o="http://omnifaces.org/ui" >
 	
 	<ui:define name="titulo">Pesquisa produtos</ui:define>
 	<ui:define name="corpo">
@@ -61,7 +62,9 @@
 				</p:column>
 				
 				<p:column headerText="Opções" style="text-align: center; width: 100px">
-					<p:button icon="ui-icon-pencil" title="Editar"/>
+					<p:button icon="ui-icon-pencil" title="Editar" outcome="/produtos/CadastroProduto" >
+						<o:param name="produto" value="#{produto}" />
+					</p:button>
 					<p:commandButton icon="ui-icon-trash" title="Excluir" oncomplete="PF('confirmacaoExclusao').show();" />
 				</p:column>		
 			</p:dataTable>

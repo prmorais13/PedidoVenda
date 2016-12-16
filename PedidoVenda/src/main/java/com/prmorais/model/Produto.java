@@ -41,7 +41,8 @@ public class Produto implements Serializable {
 		this.id = id;
 	}
 
-	@NotBlank @SKU
+	@NotBlank
+	@SKU
 	@Column(nullable = false, length = 20, unique = true)
 	public String getSku() {
 		return sku;
@@ -118,6 +119,11 @@ public class Produto implements Serializable {
 		} else if (!id.equals(other.id))
 			return false;
 		return true;
+	}
+
+	@Override
+	public String toString() {
+		return "Produto [id=" + id + "]";
 	}
 
 }

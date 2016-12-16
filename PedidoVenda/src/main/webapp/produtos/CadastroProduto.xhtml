@@ -3,12 +3,14 @@
 	xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
 	xmlns:f="http://xmlns.jcp.org/jsf/core"
 	xmlns:h="http://xmlns.jcp.org/jsf/html"
-	xmlns:p="http://primefaces.org/ui">
+	xmlns:p="http://primefaces.org/ui"
+	xmlns:o="http://omnifaces.org/ui" >
 	
 	<ui:define name="titulo">Novo Produto</ui:define>
 	<ui:define name="corpo">
 		
 		<f:metadata>
+			<o:viewParam name="produto" value="#{cadastroProdutoBean.produto}" />
 			<f:viewAction action="#{cadastroProdutoBean.inicializar}" />
 		</f:metadata>
 	
