@@ -65,12 +65,14 @@
 					<p:button icon="ui-icon-pencil" title="Editar" outcome="/produtos/CadastroProduto" >
 						<o:param name="p" value="#{produto.id}" />
 					</p:button>
-					<p:commandButton icon="ui-icon-trash" title="Excluir" oncomplete="PF('confirmacaoExclusao').show();" />
+					<p:commandButton icon="ui-icon-trash" title="Excluir"
+						oncomplete="PF('confirmacaoExclusao').show();" />
 				</p:column>		
 			</p:dataTable>
 			
-			<p:confirmDialog header="Exclusão de produto" message="Tem certeza que deseja excluir o produto?"
-				widgetVar="confirmacaoExclusao" closable="false" >
+			<p:confirmDialog header="Exclusão de produto" widgetVar="confirmacaoExclusao" 
+				message="Tem certeza que deseja excluir o produto?"
+				closable="false" >
 				
 				<p:button value="Não" onclick="PF('confirmacaoExclusao').hide(); return false;" />
 				<p:commandButton value="Sim" oncomplete="PF('confirmacaoExclusao').hide();" />

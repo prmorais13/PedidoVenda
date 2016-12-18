@@ -43,6 +43,10 @@ public class CadastroProdutoBean implements Serializable {
 		if(this.categoriaPai != null){
 			this.carregarSubcategorias();
 		}
+		
+		if(this.produto == null){
+			this.limpar();
+		}
 	}
 	
 	public void carregarSubcategorias(){
@@ -62,17 +66,26 @@ public class CadastroProdutoBean implements Serializable {
 	}
 
 	public Produto getProduto() {
+		/*if(produto == null){
+			produto = new Produto();
+		}*/
 		return produto;
 	}
 	
 	public void setProduto(Produto produto) {
-		this.produto = produto;
 		
-		if(produto != null){
+		/*if(produto != null){
+			this.produto = produto;
+			this.categoriaPai = this.produto.getCategoria().getCategoriaPai();
+		}
+		*/
+		
+		this.produto = produto;
+		if(this.produto != null){
 			this.categoriaPai = this.produto.getCategoria().getCategoriaPai();
 		}
 	}
-
+	
 	@NotNull
 	public Categoria getCategoriaPai() {
 		return categoriaPai;

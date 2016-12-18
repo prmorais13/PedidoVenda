@@ -25,4 +25,8 @@ public class Categorias implements Serializable {
 			Categoria.class).setParameter("raiz", categoriaPai).getResultList();
 	}
 
+	public Categoria porId(Long id) {
+		return manager.find(Categoria.class, id);
+	}
+
 }

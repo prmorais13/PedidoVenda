@@ -3,13 +3,16 @@ package com.prmorais.converter;
 import javax.faces.component.UIComponent;
 import javax.faces.context.FacesContext;
 import javax.faces.convert.Converter;
+import javax.faces.convert.FacesConverter;
 import javax.inject.Inject;
+
+import org.apache.commons.lang3.StringUtils;
 
 import com.prmorais.model.Produto;
 import com.prmorais.repository.Produtos;
 
-//@FacesConverter(forClass = Produto.class)
-public class ProdutoConverter implements Converter {
+@FacesConverter(forClass = Produto.class)
+public class ProdutoConverter implements Converter{
 
 	@Inject
 	private Produtos produtos;
@@ -22,14 +25,13 @@ public class ProdutoConverter implements Converter {
 
 	@Override
 	public Object getAsObject(FacesContext context, UIComponent component, String value) {
+
 		Produto retorno = null;
 
-		if (!value.equals("")) {
-			//Long id = new Long(value);
-			Long id = Long.parseLong(value);
+		if (StringUtils.isNotBlank(value)) {
+			Long id = new Long(value);
 			retorno = produtos.porId(id);
 		}
-
 		return retorno;
 	}
 
@@ -38,7 +40,13 @@ public class ProdutoConverter implements Converter {
 		if (value != null) {
 			Produto produto = (Produto) value;
 			return produto.getId() == null ? null : produto.getId().toString();
+		
 		}
+		/*Produto produto = (Produto) value;
+		if(value instanceof Produto){
+			
+			return produto.getId() == null ? null : produto.getId().toString();
+		}*/
 
 		return "";
 	}
