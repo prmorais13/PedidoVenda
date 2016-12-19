@@ -23,7 +23,7 @@ public class CadastroProdutoBean implements Serializable {
 
 	@Inject
 	private Categorias categorias;
-	
+
 	@Inject
 	private CadastroProdutoService cadastroProdutoService;
 
@@ -39,21 +39,21 @@ public class CadastroProdutoBean implements Serializable {
 
 	public void inicializar() {
 		this.categoriasRaizes = this.categorias.raizes();
-		
-		if(this.categoriaPai != null){
+
+		if (this.categoriaPai != null) {
 			this.carregarSubcategorias();
 		}
-		
-		if(this.produto == null){
+
+		if (this.produto == null) {
 			this.limpar();
 		}
 	}
-	
-	public void carregarSubcategorias(){
+
+	public void carregarSubcategorias() {
 		this.subCategorias = this.categorias.subCategoriasDe(categoriaPai);
 	}
-	
-	public void limpar(){
+
+	public void limpar() {
 		this.produto = new Produto();
 		this.categoriaPai = null;
 		this.subCategorias = new ArrayList<>();
@@ -65,27 +65,30 @@ public class CadastroProdutoBean implements Serializable {
 		FacesUtil.addInfoMessage("Produto salvo com sucesso!");
 	}
 
+	public void excluir() {
+
+	}
+
 	public Produto getProduto() {
-		/*if(produto == null){
-			produto = new Produto();
-		}*/
+		/*
+		 * if(produto == null){ produto = new Produto(); }
+		 */
 		return produto;
 	}
-	
+
 	public void setProduto(Produto produto) {
-		
-		/*if(produto != null){
-			this.produto = produto;
-			this.categoriaPai = this.produto.getCategoria().getCategoriaPai();
-		}
-		*/
-		
+
+		/*
+		 * if(produto != null){ this.produto = produto; this.categoriaPai =
+		 * this.produto.getCategoria().getCategoriaPai(); }
+		 */
+
 		this.produto = produto;
-		if(this.produto != null){
+		if (this.produto != null) {
 			this.categoriaPai = this.produto.getCategoria().getCategoriaPai();
 		}
 	}
-	
+
 	@NotNull
 	public Categoria getCategoriaPai() {
 		return categoriaPai;
