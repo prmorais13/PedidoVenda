@@ -20,7 +20,7 @@ public class CadastroUsuarioBean implements Serializable {
 	}
 	
 	public void salvar(){
-	
+		
 	}
 	
 	public Usuario getUsuario() {
