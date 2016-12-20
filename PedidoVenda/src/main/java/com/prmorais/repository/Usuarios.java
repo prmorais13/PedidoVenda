@@ -5,6 +5,7 @@ import java.util.List;
 
 import javax.inject.Inject;
 import javax.persistence.EntityManager;
+import javax.persistence.NoResultException;
 import javax.persistence.PersistenceException;
 
 import org.apache.commons.lang3.StringUtils;
@@ -14,6 +15,7 @@ import org.hibernate.criterion.MatchMode;
 import org.hibernate.criterion.Order;
 import org.hibernate.criterion.Restrictions;
 
+import com.prmorais.model.Grupo;
 import com.prmorais.model.Usuario;
 import com.prmorais.repository.filter.UsuarioFilter;
 import com.prmorais.service.NegocioException;
@@ -25,6 +27,8 @@ public class Usuarios implements Serializable {
 	
 	@Inject
 	private EntityManager manager;
+	
+	
 
 	public Usuario guardar(Usuario usuario) {
 
@@ -44,15 +48,15 @@ public class Usuarios implements Serializable {
 		}
 	}
 
-	/*public Usuario porNome(String nome) {
+	public Usuario porEmail(String email) {
 		try{
-			return manager.createQuery("FROM Produto WHERE upper(sku) =:sku", Produto.class)
-				.setParameter("sku", sku.toUpperCase()).getSingleResult();
+			return manager.createQuery("FROM Usuario WHERE lower(email) =:email", Usuario.class)
+				.setParameter("email", email.toLowerCase()).getSingleResult();
 		
 		}catch (NoResultException e) {
 			return null;
 		}
-	}*/
+	}
 	
 	@SuppressWarnings({ "deprecation", "unchecked" })
 	public List<Usuario> filtrados(UsuarioFilter filtro){
@@ -68,7 +72,5 @@ public class Usuarios implements Serializable {
 	public Usuario porId(Long id) {
 		return this.manager.find(Usuario.class, id);
 	}
-	
-	
 	
 }
