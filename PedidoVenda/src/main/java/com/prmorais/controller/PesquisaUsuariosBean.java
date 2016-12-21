@@ -10,6 +10,7 @@ import javax.inject.Named;
 import com.prmorais.model.Usuario;
 import com.prmorais.repository.Usuarios;
 import com.prmorais.repository.filter.UsuarioFilter;
+import com.prmorais.util.jsf.FacesUtil;
 
 
 @Named
@@ -31,9 +32,14 @@ public class PesquisaUsuariosBean implements Serializable {
 	
 	public void pesquisar(){
 		this.usuariosFiltrados = this.usuarios.filtrados(this.filtro);
-		for (Usuario usuario : usuariosFiltrados) {
-			System.out.println("Nome: " + usuario.getNome());
-		}
+	}
+	
+	public void excluir(){
+		this.usuarios.remover(this.usuarioSelecionado);
+		this.usuariosFiltrados.remove(this.usuarioSelecionado);
+		
+		FacesUtil.addInfoMessage("Produto " + this.usuarioSelecionado.getEmail() + " excluído com sucesso.");
+		
 	}
 	
 	public Usuario getUsuarioSelecionado() {

@@ -8,8 +8,10 @@
 	<ui:define name="titulo">Pesquisa usuários</ui:define>
 	<ui:define name="corpo">
 	
-		<h:form>
+		<h:form id="frm">
 			<h1>Pesquisa usuários</h1>
+			
+			<p:messages id="msg" closable="true" />
 			
 			<p:toolbar style="margin-top: 20px">
 				<p:toolbarGroup>
@@ -41,17 +43,27 @@
 				</p:column>
 				
 				<p:column headerText="Opções" style="text-align: center; width: 100px">
-					<p:button icon="ui-icon-pencil" title="Editar"/>
-					<p:commandButton icon="ui-icon-trash" title="Excluir"
-						oncomplete="PF('confirmacaoExclusao').hide();" />
+					<p:button icon="ui-icon-pencil" title="Editar" outcome="/usuarios/CadastroUsuario" >
+						<f:param name="usuario" value="#{usuario.id}" />
+					</p:button>
+					
+					<p:commandButton icon="ui-icon-trash" title="Excluir" oncomplete="PF('confirmacaoExclusao').show();"
+						process="@this" update=":frm:confirmacaoExclusaoDialog"
+						 >
+						
+						<f:setPropertyActionListener value="#{usuario}" target="#{pesquisaUsuariosBean.usuarioSelecionado}" />
+						
+					</p:commandButton>
 				</p:column>		
 			</p:dataTable>
 			
-			<p:confirmDialog header="Exclusão de usuário" message="Tem certeza que deseja excluir o usuário?"
+			<p:confirmDialog id="confirmacaoExclusaoDialog" header="Exclusão de usuário"
+				message="Tem certeza que deseja excluir o usuário #{pesquisaUsuariosBean.usuarioSelecionado.email}?"
 				widgetVar="confirmacaoExclusao" closable="false" >
 				
 				<p:button value="Não" onclick="PF('confirmacaoExclusao').hide(); return false;" />
-				<p:commandButton value="Sim" oncomplete="PF('confirmacaoExclusao').hide();" />
+				<p:commandButton value="Sim" oncomplete="PF('confirmacaoExclusao').hide();"
+					action="#{pesquisaUsuariosBean.excluir}" process="@this" update=":frm:usuariosTable :frm:msg" />
 			
 			</p:confirmDialog>
 		</h:form>

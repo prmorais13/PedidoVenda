@@ -22,10 +22,6 @@ public class ListagemGruposBean implements Serializable {
 
 	private List<Grupo> gruposFiltrados;
 	
-	public ListagemGruposBean(){
-		
-	}
-	
 	public void inicializar(){
 		this.gruposFiltrados = this.grupos.lista();
 	}

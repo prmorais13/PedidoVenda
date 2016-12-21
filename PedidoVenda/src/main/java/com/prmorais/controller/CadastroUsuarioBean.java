@@ -68,6 +68,10 @@ public class CadastroUsuarioBean implements Serializable {
 		this.usuario.getGrupos().remove(this.grupo);
 	}
 	
+	public boolean isEditando(){
+		return this.usuario.getId() != null;
+	}
+	
 	public Usuario getUsuario() {
 		return usuario;
 	}

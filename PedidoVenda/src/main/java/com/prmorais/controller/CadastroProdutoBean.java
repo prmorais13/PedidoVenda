@@ -65,8 +65,8 @@ public class CadastroProdutoBean implements Serializable {
 		FacesUtil.addInfoMessage("Produto salvo com sucesso!");
 	}
 
-	public void excluir() {
-
+	public boolean isEditando(){
+		return this.produto.getId() != null;
 	}
 
 	public Produto getProduto() {
