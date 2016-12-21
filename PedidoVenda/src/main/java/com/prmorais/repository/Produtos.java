@@ -73,7 +73,5 @@ public class Produtos implements Serializable {
 	public Produto porId(Long id) {
 		return this.manager.find(Produto.class, id);
 	}
-	
-	
-	
+
 }

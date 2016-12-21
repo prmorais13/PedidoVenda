@@ -13,7 +13,8 @@
 			
 			<p:toolbar style="margin-top: 20px">
 				<p:toolbarGroup>
-					<p:commandButton value="Pesquisa" />
+					<p:commandButton value="Pesquisa" action="#{pesquisaUsuariosBean.pesquisar}"
+						update="@form" />
 				</p:toolbarGroup>
 				
 				<p:toolbarGroup align="right">
@@ -24,19 +25,19 @@
 			<p:panelGrid columns="2" id="painel" style="width: 100%; margin-top: 20px"
 				columnClasses="rotulo, campo" styleClass="panelGridSemBorda" >			
 				<p:outputLabel value="Nome" for="nome" />
-				<p:inputText id="nome" size="60"/>
+				<p:inputText id="nome" value="#{pesquisaUsuariosBean.filtro.nome}" size="60"/>
 			</p:panelGrid>
 			
-			<p:dataTable id="usuariosTable" value="#{pesquisaUsuariosBean.clientesFiltrados}" var="usuario"
+			<p:dataTable id="usuariosTable" value="#{pesquisaUsuariosBean.usuariosFiltrados}" var="usuario"
 				style="margin-top: 20px" emptyMessage="Usuário não encontrato." rows="10"
 				paginator="true" paginatorAlwaysVisible="false" paginatorPosition="bottom">
 				
 				<p:column headerText="Nome" >
-					<h:outputText value="Paulo Roberto de Morais" />
+					<h:outputText value="#{usuario.nome}" />
 				</p:column>
 				
 				<p:column headerText="E-mail" >
-					<h:outputText value="prmorais_13@hotmail.com" />
+					<h:outputText value="#{usuario.email}" />
 				</p:column>
 				
 				<p:column headerText="Opções" style="text-align: center; width: 100px">

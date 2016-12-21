@@ -15,7 +15,7 @@
 		<h:form id="frm">
 			<h1>Novo usuário</h1>
 			
-			<p:messages closable="true"/>
+			<p:messages id="msg" closable="true"/>
 			
 			<p:toolbar style="margin-top: 20px">
 				<p:toolbarGroup>
@@ -49,7 +49,7 @@
 				</p:selectOneMenu>
 				
 				<p:commandButton value="Adicionar grupo" action="#{cadastroUsuarioBean.adicionarGrupo}"
-					process="@this" update="gruposTable" />
+					process="@this itemGrupo" update="gruposTable msg" />
 			</p:panelGrid>
 			
 			<p:dataTable id="gruposTable" value="#{cadastroUsuarioBean.usuario.grupos}" var="grupo"
@@ -63,7 +63,12 @@
 				<p:column headerText="Opções" style="text-align: center; width: 100px">
 					<p:button icon="ui-icon-pencil" title="Editar"/>
 					<p:commandButton icon="ui-icon-trash" title="Excluir"
-						oncomplete="PF('confirmacaoExclusao').show();" />
+						oncomplete="PF('confirmacaoExclusao').show();" >
+						
+						<f:setPropertyActionListener value="#{grupo}"
+							target="#{cadastroUsuarioBean.grupo}" />
+					
+					</p:commandButton>
 				</p:column>		
 			</p:dataTable>
 			
@@ -71,7 +76,9 @@
 				widgetVar="confirmacaoExclusao" closable="false" >
 				
 				<p:button value="Não" onclick="PF('confirmacaoExclusao').hide(); return false;" />
-				<p:commandButton value="Sim" oncomplete="PF('confirmacaoExclusao').hide();" />
+				<p:commandButton value="Sim" actionListener="#{cadastroUsuarioBean.removerGrupo}"
+					oncomplete="PF('confirmacaoExclusao').hide();" process="@this"
+					update="gruposTable" />
 			
 			</p:confirmDialog>
 		</h:form>

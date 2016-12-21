@@ -4,7 +4,11 @@ import java.io.Serializable;
 import java.util.List;
 
 import javax.faces.view.ViewScoped;
+import javax.inject.Inject;
 import javax.inject.Named;
+
+import com.prmorais.model.Grupo;
+import com.prmorais.repository.Grupos;
 
 
 @Named
@@ -12,14 +16,21 @@ import javax.inject.Named;
 public class ListagemGruposBean implements Serializable {
 
 	private static final long serialVersionUID = 1L;
+	
+	@Inject
+	private Grupos grupos;
 
-	private List<Integer> gruposFiltrados;
+	private List<Grupo> gruposFiltrados;
 	
 	public ListagemGruposBean(){
 		
 	}
 	
-	public List<Integer> getGruposFiltrados() {
+	public void inicializar(){
+		this.gruposFiltrados = this.grupos.lista();
+	}
+	
+	public List<Grupo> getGruposFiltrados() {
 		return gruposFiltrados;
 	}
 

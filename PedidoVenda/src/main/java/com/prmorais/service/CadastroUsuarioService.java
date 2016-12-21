@@ -25,6 +25,10 @@ public class CadastroUsuarioService implements Serializable {
 			throw new NegocioException("Já existe um usuário com o email informado!");
 		}
 		
+		if(usuario.getGrupos().size() == 0){
+			throw new NegocioException("O usuário deve pertencer a pelo menos um grupo!");
+		}
+		
 		return this.usuarios.guardar(usuario);
 	}
 

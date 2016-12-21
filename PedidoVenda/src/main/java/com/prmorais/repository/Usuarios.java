@@ -15,7 +15,6 @@ import org.hibernate.criterion.MatchMode;
 import org.hibernate.criterion.Order;
 import org.hibernate.criterion.Restrictions;
 
-import com.prmorais.model.Grupo;
 import com.prmorais.model.Usuario;
 import com.prmorais.repository.filter.UsuarioFilter;
 import com.prmorais.service.NegocioException;

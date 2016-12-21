@@ -1,7 +1,6 @@
 package com.prmorais.controller;
 
 import java.io.Serializable;
-import java.util.ArrayList;
 import java.util.List;
 
 import javax.faces.view.ViewScoped;
@@ -23,7 +22,6 @@ public class CadastroUsuarioBean implements Serializable {
 	private Usuario usuario;
 	private Grupo grupo;
 	private List<Grupo> listaDeGrupos;
-	private List<Grupo> listGrupo = new ArrayList<>();
 
 	@Inject
 	private CadastroUsuarioService cadastroUsuarioService;
@@ -37,6 +35,7 @@ public class CadastroUsuarioBean implements Serializable {
 	
 	public void inicializar(){
 		this.listaDeGrupos = this.grupos.lista();
+
 	}
 
 	public void salvar() {
@@ -49,15 +48,24 @@ public class CadastroUsuarioBean implements Serializable {
 	public void limpar() {
 		this.usuario = new Usuario();
 		this.grupo = new Grupo();
-		this.listaDeGrupos = null;
 	}
 
 	public void adicionarGrupo(){
-		this.usuario.getGrupos().add(this.grupo);
+		if(this.usuario.getGrupos().size() > 0 && this.usuario.getGrupos().contains(grupo)){
+			
+			FacesUtil.addErroMessage("Usuário já pertence a esse grupo!");
 		
-		for (Grupo grupo : usuario.getGrupos()) {
-			System.out.println("Nome :" + grupo.getNome());
+		}else if(this.grupo == null){
+			
+			FacesUtil.addErroMessage("Selecione um grupo para adicionar o usuário!");
+		
+		}else{
+			this.usuario.getGrupos().add(this.grupo);
 		}
+	}
+	
+	public void removerGrupo(){
+		this.usuario.getGrupos().remove(this.grupo);
 	}
 	
 	public Usuario getUsuario() {
@@ -79,13 +87,9 @@ public class CadastroUsuarioBean implements Serializable {
 	public List<Grupo> getListaDeGrupos() {
 		return listaDeGrupos;
 	}
-
-	public List<Grupo> getListGrupo() {
-		return listGrupo;
-	}
-
-	public void setListGrupo(List<Grupo> listGrupo) {
-		this.listGrupo = listGrupo;
+	
+	public void setListaDeGrupos(List<Grupo> listaDeGrupos) {
+		this.listaDeGrupos = listaDeGrupos;
 	}
 
 }
