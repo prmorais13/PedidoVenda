@@ -5,6 +5,7 @@ import java.util.List;
 
 import javax.inject.Inject;
 import javax.persistence.EntityManager;
+import javax.persistence.NoResultException;
 import javax.persistence.PersistenceException;
 
 import org.apache.commons.lang3.StringUtils;
@@ -44,23 +45,23 @@ public class Clientes implements Serializable {
 		}
 	}
 
-	/*public Cliente porSku(String sku) {
+	public Cliente porDocReceitaFederal(String docReceitaFederal) {
 		try{
-			return manager.createQuery("FROM Cliente WHERE upper(sku) =:sku", Cliente.class)
-				.setParameter("sku", sku.toUpperCase()).getSingleResult();
+			return manager.createQuery("FROM Cliente WHERE documentoReceitaFederal =:docReceitaFederal", Cliente.class)
+				.setParameter("docReceitaFederal", docReceitaFederal).getSingleResult();
 		
 		}catch (NoResultException e) {
 			return null;
 		}
-	}*/
+	}
 	
 	@SuppressWarnings({ "deprecation", "unchecked" })
 	public List<Cliente> filtrados(ClienteFilter filtro){
 		Session session = (Session) manager;
 		Criteria criteria = session.createCriteria(Cliente.class);
 		
-		if(StringUtils.isNotBlank(filtro.getCnpj())){
-			criteria.add(Restrictions.eq("sku", filtro.getCnpj()));
+		if(StringUtils.isNotBlank(filtro.getDocReceitaFederal())){
+			criteria.add(Restrictions.eq("docReceitaFederal", filtro.getDocReceitaFederal()));
 		}
 		
 		if(StringUtils.isNotBlank(filtro.getNome())){

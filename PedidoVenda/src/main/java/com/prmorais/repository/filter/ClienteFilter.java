@@ -6,15 +6,15 @@ public class ClienteFilter implements Serializable {
 
 	private static final long serialVersionUID = 1L;
 
-	private String cnpj;
+	private String docReceitaFederal;
 	private String nome;
 
-	public String getCnpj() {
-		return cnpj;
+	public String getDocReceitaFederal() {
+		return docReceitaFederal;
 	}
 
-	public void setCnpj(String cnpj) {
-		this.cnpj = cnpj;
+	public void setDocReceitaFederal(String docReceitaFederal) {
+		this.docReceitaFederal = docReceitaFederal;
 	}
 
 	public String getNome() {

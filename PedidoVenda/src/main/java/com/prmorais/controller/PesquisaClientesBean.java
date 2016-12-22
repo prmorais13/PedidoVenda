@@ -28,10 +28,6 @@ public class PesquisaClientesBean implements Serializable {
 		}
 	}
 	
-	public void salvar(){
-		
-	}
-	
 	public Cliente getCliente() {
 		return cliente;
 	}
