@@ -22,6 +22,7 @@ public class CadastroClienteService implements Serializable {
 		if(ClienteExistente != null && !ClienteExistente.equals(cliente)){
 			throw new NegocioException("Já existe um Cliente com o documento informado!");
 		}
+
 		return this.clientes.guardar(cliente);
 	}
 
