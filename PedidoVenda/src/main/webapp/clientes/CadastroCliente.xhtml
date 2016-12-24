@@ -3,11 +3,17 @@
 	xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
 	xmlns:f="http://xmlns.jcp.org/jsf/core"
 	xmlns:h="http://xmlns.jcp.org/jsf/html"
-	xmlns:p="http://primefaces.org/ui">
+	xmlns:p="http://primefaces.org/ui"
+    xmlns:o="http://omnifaces.org/ui">
 	
 	<ui:define name="titulo">Novo Cliente</ui:define>
 	<ui:define name="corpo">
 		
+		<f:metadata>
+			<f:viewAction action="#{cadastroClienteBean.inicializar}" />
+			<o:viewParam name="cliente" value="#{cadastroClienteBean.cliente}" />
+		</f:metadata>
+			
 		<h:form id="frm">
 			
 			<h1>Novo cliente</h1>
@@ -30,7 +36,7 @@
 				columnClasses="rotulo, campo" styleClass="panelGridSemBorda" >
 				
 				<p:outputLabel value="Nome" for="nome" />
-				<p:inputText id="nome" size="60"  maxlength="80" value="#{cadastroClienteBean.cliente.nome}"/>
+				<p:inputText id="nome" size="60"  maxlength="80" value="#{cadastroClienteBean.cliente.nome}" />
 				
 				<p:outputLabel value="Tipo" for="tipo" />
 				<p:selectOneRadio id="tipo" value="#{cadastroClienteBean.cliente.tipo}" >
@@ -50,8 +56,7 @@
 			</p:panelGrid>
 			
 			<p:commandButton value="Adicionar endereço" style="margin-top: 10px"
-				process="@this" update="painelEndereco" actionListener="#{cadastroClienteBean.novo}"
-				oncomplete="PF('dlgEndereco').show()" >
+				process="@this" update="painelEndereco" oncomplete="PF('dlgEndereco').show()" >
 				<p:resetInput target="painelEndereco" />
 			</p:commandButton>
 			
@@ -80,9 +85,19 @@
 				</p:column>
 				
 				<p:column headerText="Opções" style="text-align: center; width: 100px">
-					<p:button icon="ui-icon-pencil" title="Editar"/>
+					<p:commandButton icon="ui-icon-pencil" title="Editar"
+						process="@this" update=":frm:painelEndereco"
+						oncomplete="PF('dlgEndereco').show()"  >
+						
+						<f:setPropertyActionListener value="#{endereco}" target="#{cadastroClienteBean.endereco}" />
+					</p:commandButton>
+					
 					<p:commandButton icon="ui-icon-trash" title="Excluir"
-						oncomplete="PF('confirmacaoExclusao').show();" />
+						process="@this" update=":frm:confirmacaoExclusaoDialog"
+						oncomplete="PF('confirmacaoExclusao').show();" >
+						
+						<f:setPropertyActionListener value="#{endereco}" target="#{cadastroClienteBean.endereco}" />
+					</p:commandButton>
 				</p:column>		
 			</p:dataTable>
 			
@@ -125,17 +140,21 @@
 						
 						<p:outputLabel />
 						<p:commandButton value="Incluir" action="#{cadastroClienteBean.inserirEndereco}" 
-							process="painelEndereco" update="painelEndereco enderecosTable msg"
+							process="painelEndereco" update="painelEndereco enderecosTable"
 							oncomplete="if (!args.validationFailed) PF('dlgEndereco').hide()" />
 					</p:panelGrid>
 				</h:panelGroup>
 			</p:dialog>
 			
-			<p:confirmDialog header="Exclusão de endereço" message="Tem certeza que deseja excluir o endereço?"
+			<p:confirmDialog id="confirmacaoExclusaoDialog" header="Exclusão de endereço"
+				message="Tem certeza que deseja excluir o endereço com CEP #{cadastroClienteBean.endereco.cep}?"
 				widgetVar="confirmacaoExclusao" closable="false" >
 				
 				<p:button value="Não" onclick="PF('confirmacaoExclusao').hide(); return false;" />
-				<p:commandButton value="Sim" oncomplete="PF('confirmacaoExclusao').hide();" />
+				
+				<p:commandButton value="Sim" action="#{cadastroClienteBean.removerEndereco}"
+					oncomplete="PF('confirmacaoExclusao').hide();"
+					process="@this" update=":frm:enderecosTable" />
 			
 			</p:confirmDialog>
 		</h:form>

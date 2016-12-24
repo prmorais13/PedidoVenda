@@ -3,32 +3,37 @@
 	xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
 	xmlns:f="http://xmlns.jcp.org/jsf/core"
 	xmlns:h="http://xmlns.jcp.org/jsf/html"
-	xmlns:p="http://primefaces.org/ui">
+	xmlns:p="http://primefaces.org/ui"
+                                                                  xmlns:o="http://omnifaces.org/ui">
 	
 	<ui:define name="titulo">Pesquisa clientes</ui:define>
 	<ui:define name="corpo">
 	
-		<h:form>
+		<h:form id="frm">
+		
 			<h1>Pesquisa clientes</h1>
+			
+			<p:messages id="msg" closable="true" />
 			
 			<p:toolbar style="margin-top: 20px">
 				<p:toolbarGroup>
-					<p:commandButton value="Pesquisa" />
+					<p:commandButton value="Pesquisa" action="#{pesquisaClientesBean.pesquisar}"
+						process="@this" update="@form" />
 				</p:toolbarGroup>
 				
 				<p:toolbarGroup align="right">
 					<p:button value="Novo" outcome="/clientes/CadastroCliente"/>
-				</p:toolbarGroup>
+				</p:toolbarGroup> 
 			</p:toolbar>
 			
 			<p:panelGrid columns="2" id="painel" style="width: 100%; margin-top: 20px"
 				columnClasses="rotulo, campo" styleClass="panelGridSemBorda" >
 				
 				<p:outputLabel value="CPF/CNPJ" for="cpf_cnpj" />
-				<p:inputMask id="cpf_cnpj" size="20"/>
+				<p:inputMask id="cpf_cnpj" size="20" value="#{pesquisaClientesBean.filtro.docReceitaFederal}" />
 				
 				<p:outputLabel value="Nome" for="nome" />
-				<p:inputText id="nome" size="60"/>
+				<p:inputText id="nome" size="60" value="#{pesquisaClientesBean.filtro.nome}" />
 			</p:panelGrid>
 			
 			<p:dataTable id="clientesTable" value="#{pesquisaClientesBean.clientesFiltrados}" var="cliente"
@@ -36,30 +41,42 @@
 				paginator="true" paginatorAlwaysVisible="false" paginatorPosition="bottom">
 				
 				<p:column headerText="Nome" >
-					<h:outputText value="Supermercado Nordestão" />
+					<h:outputText value="#{cliente.nome}" />
 				</p:column>
 				
 				<p:column headerText="Tipo" style="width: 80px">
-					<h:outputText value="Jurídica" />
+					<h:outputText value="#{cliente.tipo.descricao}" />
 				</p:column>
 				
-				<p:column headerText="CNPJ/CPF" style="width:150px">
-					<h:outputText value="10.526.412/0001-13" />
+				<p:column headerText="CNPJ/CPF" style="width:150px; text-align: center">
+					<h:outputText value="#{cliente.documentoReceitaFederal}" />
 				</p:column>
 				
 				<p:column headerText="Opções" style="text-align: center; width: 100px">
-					<p:button icon="ui-icon-pencil" title="Editar"/>
+					<p:button icon="ui-icon-pencil" title="Editar" outcome="/clientes/CadastroCliente" >
+						<o:param name="cliente" value="#{cliente.id}" />
+					</p:button>
+					
 					<p:commandButton icon="ui-icon-trash" title="Excluir"
-						oncomplete="PF('confirmacaoExclusao').show();" />
+						oncomplete="PF('confirmacaoExclusao').show();"
+						process="@this" update=":frm:confirmacaoExclusaoDialog" >
+						
+						<f:setPropertyActionListener value="#{cliente}"
+							target="#{pesquisaClientesBean.clienteSelecionado}" />
+					</p:commandButton>
 				</p:column>		
 			</p:dataTable>
 			
-			<p:confirmDialog header="Exclusão de cliente" message="Tem certeza que deseja excluir o cliente?"
+			<p:confirmDialog id="confirmacaoExclusaoDialog" header="Exclusão de cliente"
+				message="Tem certeza que deseja excluir o cliente com CPF/CNPJ 
+				#{pesquisaClientesBean.clienteSelecionado.documentoReceitaFederal}?"
 				widgetVar="confirmacaoExclusao" closable="false" >
 				
 				<p:button value="Não" onclick="PF('confirmacaoExclusao').hide(); return false;" />
-				<p:commandButton value="Sim" oncomplete="PF('confirmacaoExclusao').hide();" />
-			
+				
+				<p:commandButton value="Sim" action="#{pesquisaClientesBean.excluir}"
+				oncomplete="PF('confirmacaoExclusao').hide();"
+				process="@this" update=":frm:clientesTable :frm:msg" />			
 			</p:confirmDialog>
 		</h:form>
 	</ui:define>

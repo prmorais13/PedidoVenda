@@ -28,7 +28,6 @@ public class Clientes implements Serializable {
 	private EntityManager manager;
 
 	public Cliente guardar(Cliente cliente) {
-
 		return this.manager.merge(cliente);
 	}
 	

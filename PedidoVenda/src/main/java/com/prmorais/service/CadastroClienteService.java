@@ -22,6 +22,10 @@ public class CadastroClienteService implements Serializable {
 		if(ClienteExistente != null && !ClienteExistente.equals(cliente)){
 			throw new NegocioException("Já existe um Cliente com o documento informado!");
 		}
+		
+		if(cliente.getEnderecos().isEmpty()){
+			throw new NegocioException("Insira pelo menos um endereço para o cliente!");
+		}
 
 		return this.clientes.guardar(cliente);
 	}

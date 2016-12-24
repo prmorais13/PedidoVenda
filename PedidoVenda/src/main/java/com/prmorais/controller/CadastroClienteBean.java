@@ -2,6 +2,7 @@ package com.prmorais.controller;
 
 import java.io.Serializable;
 
+import javax.annotation.PostConstruct;
 import javax.faces.view.ViewScoped;
 import javax.inject.Inject;
 import javax.inject.Named;
@@ -12,7 +13,6 @@ import com.prmorais.model.Cliente;
 import com.prmorais.model.Endereco;
 import com.prmorais.model.TipoPessoa;
 import com.prmorais.service.CadastroClienteService;
-import com.prmorais.service.NegocioException;
 
 @Named
 @ViewScoped
@@ -30,12 +30,20 @@ public class CadastroClienteBean implements Serializable {
 	private String rotulo;
 
 	public CadastroClienteBean() {
-		this.limpar();
+		/*this.limpar();
+		this.mudaTipoPessoa();*/
+	}
+	
+	@PostConstruct
+	public void iniciar(){
+		if (this.cliente == null) {
+			this.limpar();
+		}
 	}
 
 	public void inicializar() {
 
-		if (this.cliente == null && this.endereco == null) {
+		if (this.cliente == null) {
 			this.limpar();
 		}
 	}
@@ -43,17 +51,15 @@ public class CadastroClienteBean implements Serializable {
 	public void limpar() {
 		this.cliente = new Cliente();
 		this.endereco = new Endereco();
+		this.cliente.setTipo(TipoPessoa.FISICA);
+		this.mudaTipoPessoa();
 	}
 	
-	public void novo(){		
+	public void novoEndereco(){		
 		this.endereco = new Endereco();
 	}
 
 	public void salvar() {
-		
-		if(this.cliente.getEnderecos().isEmpty()){
-			throw new NegocioException("Insira pelo menos um endereço para o cliente!");
-		}
 		
 		this.cliente = this.cadastroClienteService.salvar(this.cliente);
 		this.limpar();
@@ -61,13 +67,11 @@ public class CadastroClienteBean implements Serializable {
 	}
 	
 	public void inserirEndereco(){
-
-		this.cliente.getEnderecos().add(endereco);
-		this.endereco.setCliente(this.cliente);
-		
-		if(this.endereco == null){ 
-			this.endereco = new Endereco();
+		if(!this.isEditando()){
+			this.cliente.getEnderecos().add(endereco);
+			this.endereco.setCliente(this.cliente);
 		}
+		//this.endereco = new Endereco();
 	}
 	
 	public void removerEndereco(){

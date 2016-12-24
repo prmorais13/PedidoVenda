@@ -7,10 +7,11 @@ import javax.faces.view.ViewScoped;
 import javax.inject.Inject;
 import javax.inject.Named;
 
+import org.omnifaces.util.Messages;
+
 import com.prmorais.model.Produto;
 import com.prmorais.repository.Produtos;
 import com.prmorais.repository.filter.ProdutoFilter;
-import com.prmorais.util.jsf.FacesUtil;
 
 @Named
 @ViewScoped
@@ -30,16 +31,16 @@ public class PesquisaProdutosBean implements Serializable {
 	}
 
 	public void pesquisar() {
-		this.produtosFiltrados = produtos.filtrados(filtro);
+		this.produtosFiltrados = this.produtos.filtrados(this.filtro);
 	}
 	
 	public void excluir(){
 		this.produtos.remover(produtoSelecionado);
 		this.produtosFiltrados.remove(produtoSelecionado);
 		
-		FacesUtil.addInfoMessage("Produto " + this.produtoSelecionado.getSku() + " excluído com sucesso.");
+		Messages.addGlobalInfo("Produto " + this.produtoSelecionado.getSku() + " excluído com sucesso.");
 	}
-
+	
 	public Produto getProdutoSelecionado() {
 		return produtoSelecionado;
 	}
