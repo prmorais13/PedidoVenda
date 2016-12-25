@@ -6,7 +6,7 @@
 	xmlns:p="http://primefaces.org/ui"
     xmlns:o="http://omnifaces.org/ui">
 	
-	<ui:define name="titulo">Novo Cliente</ui:define>
+	<ui:define name="titulo">#{cadastroClienteBean.editando ? 'Edição de cliente' : 'Novo cliente'}</ui:define>
 	<ui:define name="corpo">
 		
 		<f:metadata>
@@ -16,9 +16,10 @@
 			
 		<h:form id="frm">
 			
-			<h1>Novo cliente</h1>
+			<h1>#{cadastroClienteBean.editando ? 'Edição de Cliente' : 'Novo Cliente'}</h1>
 			
-			<p:messages id="msg" closable="true" />
+			
+			<p:growl id="msg" />
 			
 			<p:toolbar style="margin-top: 20px">
 				<p:toolbarGroup>
@@ -43,12 +44,12 @@
 					<f:selectItems value="#{cadastroClienteBean.tiposPessoa}" var="tipo"
 						itemLabel="#{tipo.descricao}" itemValue="#{tipo}" />
 					
-					<p:ajax event="change" process="@this" update="@form" listener="#{cadastroClienteBean.mudaTipoPessoa}" />
+					<p:ajax event="change" process="@this" update="rotulo cnpj_cpf"/>
 					
 				</p:selectOneRadio>
 				
-				<p:outputLabel value="#{cadastroClienteBean.rotulo}" for="cnpj" />
-				<p:inputMask id="cnpj" size="20"  maxlength="20" mask="#{cadastroClienteBean.mascara}"
+				<p:outputLabel id="rotulo" value="#{cadastroClienteBean.rotulo}" for="cnpj_cpf" />
+				<p:inputMask id="cnpj_cpf" size="20"  maxlength="20" mask="#{cadastroClienteBean.mascara}"
 					value="#{cadastroClienteBean.cliente.documentoReceitaFederal}" />
 				
 				<p:outputLabel value="E-mail" for="email" />
@@ -56,6 +57,7 @@
 			</p:panelGrid>
 			
 			<p:commandButton value="Adicionar endereço" style="margin-top: 10px"
+				actionListener="#{cadastroClienteBean.novoEndereco}"
 				process="@this" update="painelEndereco" oncomplete="PF('dlgEndereco').show()" >
 				<p:resetInput target="painelEndereco" />
 			</p:commandButton>
@@ -87,8 +89,9 @@
 				<p:column headerText="Opções" style="text-align: center; width: 100px">
 					<p:commandButton icon="ui-icon-pencil" title="Editar"
 						process="@this" update=":frm:painelEndereco"
+						actionListener="#{cadastroClienteBean.edit}"
 						oncomplete="PF('dlgEndereco').show()"  >
-						
+							
 						<f:setPropertyActionListener value="#{endereco}" target="#{cadastroClienteBean.endereco}" />
 					</p:commandButton>
 					
@@ -152,9 +155,9 @@
 				
 				<p:button value="Não" onclick="PF('confirmacaoExclusao').hide(); return false;" />
 				
-				<p:commandButton value="Sim" action="#{cadastroClienteBean.removerEndereco}"
+				<p:commandButton value="Sim" actionListener="#{cadastroClienteBean.removerEndereco()}"
 					oncomplete="PF('confirmacaoExclusao').hide();"
-					process="@this" update=":frm:enderecosTable" />
+					process="@this" update=":frm:enderecosTable :frm:msg"  />
 			
 			</p:confirmDialog>
 		</h:form>

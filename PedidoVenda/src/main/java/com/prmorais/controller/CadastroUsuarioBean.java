@@ -7,6 +7,8 @@ import javax.faces.view.ViewScoped;
 import javax.inject.Inject;
 import javax.inject.Named;
 
+import org.omnifaces.util.Messages;
+
 import com.prmorais.model.Grupo;
 import com.prmorais.model.Usuario;
 import com.prmorais.repository.Grupos;
@@ -42,7 +44,7 @@ public class CadastroUsuarioBean implements Serializable {
 		this.usuario = this.cadastroUsuarioService.salvar(this.usuario);
 		this.limpar();
 
-		FacesUtil.addInfoMessage("Usuário salvo com sucesso.");
+		Messages.addGlobalInfo("Usuário salvo com sucesso.");
 	}
 
 	public void limpar() {
@@ -53,11 +55,11 @@ public class CadastroUsuarioBean implements Serializable {
 	public void adicionarGrupo(){
 		if(this.usuario.getGrupos().size() > 0 && this.usuario.getGrupos().contains(grupo)){
 			
-			FacesUtil.addErroMessage("Usuário já pertence a esse grupo!");
+			Messages.addGlobalError("Usuário já pertence a esse grupo!");
 		
 		}else if(this.grupo == null){
 			
-			FacesUtil.addErroMessage("Selecione um grupo para adicionar o usuário!");
+			Messages.addGlobalError("Selecione um grupo para adicionar o usuário!");
 		
 		}else{
 			this.usuario.getGrupos().add(this.grupo);

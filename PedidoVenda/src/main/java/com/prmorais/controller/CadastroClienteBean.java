@@ -26,12 +26,13 @@ public class CadastroClienteBean implements Serializable {
 	private Endereco endereco;
 	private Cliente cliente;
 	
-	private String mascara;
 	private String rotulo;
+	private String mascara;
+	
+	private String isEdit;
 
 	public CadastroClienteBean() {
-		/*this.limpar();
-		this.mudaTipoPessoa();*/
+		
 	}
 	
 	@PostConstruct
@@ -39,6 +40,9 @@ public class CadastroClienteBean implements Serializable {
 		if (this.cliente == null) {
 			this.limpar();
 		}
+		
+		this.rotulo = "CPF";
+		this.mascara = "999.999.999-99";
 	}
 
 	public void inicializar() {
@@ -50,13 +54,14 @@ public class CadastroClienteBean implements Serializable {
 
 	public void limpar() {
 		this.cliente = new Cliente();
-		this.endereco = new Endereco();
+		//this.endereco = new Endereco();
 		this.cliente.setTipo(TipoPessoa.FISICA);
-		this.mudaTipoPessoa();
+		//this.setIsEdit("nao");
 	}
 	
 	public void novoEndereco(){		
 		this.endereco = new Endereco();
+		this.setIsEdit("nao");
 	}
 
 	public void salvar() {
@@ -67,31 +72,28 @@ public class CadastroClienteBean implements Serializable {
 	}
 	
 	public void inserirEndereco(){
-		if(!this.isEditando()){
+		if(!this.isEdit.equals("sim")){
 			this.cliente.getEnderecos().add(endereco);
 			this.endereco.setCliente(this.cliente);
 		}
 		//this.endereco = new Endereco();
 	}
 	
-	public void removerEndereco(){
+	public void edit(){
+		setIsEdit("sim");
+	}
+	
+	public void removerEndereco(){	
 		this.cliente.getEnderecos().remove(this.endereco);
+		
+		Messages.addGlobalInfo("Endereço removido com sucesso. "
+				+ "Clique em Salvar para concluir a exclusão");
 	}
 
 	public TipoPessoa[] getTiposPessoa() {
 		return TipoPessoa.values();
 	}
 	
-	public void mudaTipoPessoa(){
-		if(this.cliente.getTipo().equals(TipoPessoa.JURIDICA)){
-			this.mascara = "99.999.999/9999-99";
-			this.rotulo = "CNPJ";
-		}else{
-			this.mascara = "999.999.999-99";
-			this.rotulo = "CPF";
-		}
-	}
-
 	public boolean isEditando() {
 		return this.cliente.getId() != null;
 	}
@@ -114,6 +116,11 @@ public class CadastroClienteBean implements Serializable {
 	}
 	
 	public String getMascara() {
+		if(this.cliente.getTipo().equals(TipoPessoa.JURIDICA)){
+			this.mascara = "99.999.999/9999-99";
+		}else{
+			this.mascara = "999.999.999-99";
+		}
 		return mascara;
 	}
 	
@@ -122,10 +129,23 @@ public class CadastroClienteBean implements Serializable {
 	}
 	
 	public String getRotulo() {
+		if(this.cliente.getTipo().equals(TipoPessoa.JURIDICA)){
+			this.rotulo = "CNPJ";
+		}else{
+			this.rotulo = "CPF";
+		}
 		return rotulo;
 	}
 	
 	public void setRotulo(String rotulo) {
 		this.rotulo = rotulo;
+	}
+
+	public String getIsEdit() {
+		return isEdit;
+	}
+
+	public void setIsEdit(String isEdit) {
+		this.isEdit = isEdit;
 	}
 }

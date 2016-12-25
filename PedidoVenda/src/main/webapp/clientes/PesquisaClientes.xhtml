@@ -18,7 +18,7 @@
 			<p:toolbar style="margin-top: 20px">
 				<p:toolbarGroup>
 					<p:commandButton value="Pesquisa" action="#{pesquisaClientesBean.pesquisar}"
-						process="@this" update="@form" />
+						process="@this painel" update="clientesTable msg" />
 				</p:toolbarGroup>
 				
 				<p:toolbarGroup align="right">
@@ -29,8 +29,17 @@
 			<p:panelGrid columns="2" id="painel" style="width: 100%; margin-top: 20px"
 				columnClasses="rotulo, campo" styleClass="panelGridSemBorda" >
 				
-				<p:outputLabel value="CPF/CNPJ" for="cpf_cnpj" />
-				<p:inputMask id="cpf_cnpj" size="20" value="#{pesquisaClientesBean.filtro.docReceitaFederal}" />
+				<p:outputLabel value="Tipo" for="tipo" />
+				<p:selectOneRadio id="tipo" value="#{pesquisaClientesBean.tipo}" >
+					<f:selectItems value="#{pesquisaClientesBean.tiposPessoa}" var="tipo"
+						itemLabel="#{tipo.descricao}" itemValue="#{tipo}" />
+					
+					<p:ajax event="change" process="@this" update="rotulo cpf_cnpj" />				
+				</p:selectOneRadio>
+				
+				<p:outputLabel id="rotulo" value="#{pesquisaClientesBean.rotulo}" for="cpf_cnpj" />
+				<p:inputMask id="cpf_cnpj" size="20" value="#{pesquisaClientesBean.filtro.docReceitaFederal}"
+					mask="#{pesquisaClientesBean.mascara}" />
 				
 				<p:outputLabel value="Nome" for="nome" />
 				<p:inputText id="nome" size="60" value="#{pesquisaClientesBean.filtro.nome}" />

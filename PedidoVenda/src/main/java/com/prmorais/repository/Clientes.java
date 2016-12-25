@@ -60,7 +60,7 @@ public class Clientes implements Serializable {
 		Criteria criteria = session.createCriteria(Cliente.class);
 		
 		if(StringUtils.isNotBlank(filtro.getDocReceitaFederal())){
-			criteria.add(Restrictions.eq("docReceitaFederal", filtro.getDocReceitaFederal()));
+			criteria.add(Restrictions.eq("documentoReceitaFederal", filtro.getDocReceitaFederal()));
 		}
 		
 		if(StringUtils.isNotBlank(filtro.getNome())){
