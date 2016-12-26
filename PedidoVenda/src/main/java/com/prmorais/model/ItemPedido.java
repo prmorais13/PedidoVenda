@@ -11,6 +11,7 @@ import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
+import javax.persistence.Transient;
 
 @Entity
 @Table(name = "item_pedido")
@@ -71,6 +72,11 @@ public class ItemPedido implements Serializable {
 	public void setPedido(Pedido pedido) {
 		this.pedido = pedido;
 	}
+	
+	@Transient
+	public BigDecimal getValorTotal() {
+		return this.getValorUnitario().multiply(new BigDecimal(this.getQuantidade()));
+	}
 
 	@Override
 	public int hashCode() {
@@ -96,5 +102,6 @@ public class ItemPedido implements Serializable {
 			return false;
 		return true;
 	}
+
 
 }

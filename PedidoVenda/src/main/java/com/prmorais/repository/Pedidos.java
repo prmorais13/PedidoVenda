@@ -23,6 +23,10 @@ public class Pedidos implements Serializable {
 	@Inject
 	private EntityManager manager;
 	
+	public Pedido guardar(Pedido pedido) {
+		return this.manager.merge(pedido);
+	}
+	
 	@SuppressWarnings({ "deprecation", "unchecked" })
 	public List<Pedido> filtrados(PedidoFilter filtro){		
 		Session session = (Session) this.manager;
@@ -63,10 +67,15 @@ public class Pedidos implements Serializable {
 		
 		if(filtro.getStatuses() != null && filtro.getStatuses().length > 0){
 			// adicionamos uma restrição "in", passando um array de constantes da enum StatusPedido
-			criteria.add(Restrictions.in("status", filtro.getStatuses()));
+			criteria.add(Restrictions.in("status",(Object) filtro.getStatuses()));
 		}
 		
 		return criteria.addOrder(Order.asc("id")).list();
+	}
+
+
+	public Pedido porId(Long id) {
+		return this.manager.find(Pedido.class, id);
 	}
 
 }
