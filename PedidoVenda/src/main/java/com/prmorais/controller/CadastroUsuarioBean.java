@@ -13,7 +13,6 @@ import com.prmorais.model.Grupo;
 import com.prmorais.model.Usuario;
 import com.prmorais.repository.Grupos;
 import com.prmorais.service.CadastroUsuarioService;
-import com.prmorais.util.jsf.FacesUtil;
 
 @Named
 @ViewScoped

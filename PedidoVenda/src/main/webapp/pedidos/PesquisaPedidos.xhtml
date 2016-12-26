@@ -13,7 +13,8 @@
 			
 			<p:toolbar style="margin-top: 20px">
 				<p:toolbarGroup>
-					<p:commandButton value="Pesquisa" />
+					<p:commandButton value="Pesquisa" action="#{pesquisaPedidosBean.pesquisar}"
+						 update="@form"/>
 				</p:toolbarGroup>
 				
 				<p:toolbarGroup align="right">
@@ -25,29 +26,28 @@
 				columnClasses ="rotulo, campo" styleClass="panelGridSemBorda" >
 				<p:outputLabel value="Número" />
 				<h:panelGroup>
-					<p:inputText size="10"/>
+					<p:inputText size="10" value="#{pesquisaPedidosBean.filtro.numeroDe}" />
 					a
-					<p:inputText size="10"/>
+					<p:inputText size="10" value="#{pesquisaPedidosBean.filtro.numeroAte}" />
 				</h:panelGroup>
 				
 				<p:outputLabel value="Data de criação" />
 				<h:panelGroup>
-					<p:calendar size="10" pattern="dd/MM/yyyy"/>
+					<p:calendar size="10" pattern="dd/MM/yyyy" value="#{pesquisaPedidosBean.filtro.dataCriacaoDe}" />
 					a
-					<p:calendar size="10" pattern="dd/MM/yyyy"/>
+					<p:calendar size="10" pattern="dd/MM/yyyy" value="#{pesquisaPedidosBean.filtro.dataCriacaoAte}" />
 				</h:panelGroup>
 				
 				<p:outputLabel value="Vendedor" for="vendedor" />
-				<p:inputText id="vendedor" size="40"/>
+				<p:inputText id="vendedor" size="40" value="#{pesquisaPedidosBean.filtro.nomeVendedor}" />
 				
 				<p:outputLabel value="Cliente" for="cliente" />
-				<p:inputText id="cliente" size="40"/>
+				<p:inputText id="cliente" size="40" value="#{pesquisaPedidosBean.filtro.nomeCliente}"/>
 				
 				<p:outputLabel value="Status" for="status" />
-				<p:selectManyCheckbox id="status" >
-					<f:selectItem itemLabel="Orçamento"/>
-					<f:selectItem itemLabel="Emitido"/>
-					<f:selectItem itemLabel="Cancelado"/>
+				<p:selectManyCheckbox id="status" value="#{pesquisaPedidosBean.filtro.statuses}" >
+					<f:selectItems value="#{pesquisaPedidosBean.statuses}" var="status" 
+						itemLabel="#{status.descricao}" itemValue="#{status}" />
 				</p:selectManyCheckbox>			
 			</p:panelGrid>
 			
@@ -56,35 +56,37 @@
 				paginator="true" paginatorAlwaysVisible="false" paginatorPosition="bottom">
 				
 				<p:column headerText="Número" style="text-align: center; width: 100px">
-					<h:outputText value="12345" />
+					<h:outputText value="#{pedido.id}" />
 				</p:column>
 				
 				<p:column headerText="Cliente">
-					<h:outputText value="Supermercado Nordestão" />
+					<h:outputText value="#{pedido.cliente.nome}" />
 				</p:column>
 				
 				<p:column headerText="Vendedor" style="width: 250px">
-					<h:outputText value="Patricia Nunes" />
+					<h:outputText value="#{pedido.vendedor.nome}" />
 				</p:column>
 				
 				<p:column headerText="Data de Criação" style="text-align: center; width: 140px">
-					<h:outputText value="11/06/1980" />
+					<h:outputText value="#{pedido.dataCriacao}" >
+						<f:convertDateTime pattern="dd/MM/yyyy"/>
+					</h:outputText>
 				</p:column>
 				
 				<p:column headerText="Valor total" style="text-align: right; width:120px">
-					<h:outputText value="R$ 1.230,44" />
+					<h:outputText value="#{pedido.valorTotal}" >
+						<f:convertNumber type="currency"/>
+					</h:outputText>
 				</p:column>
 				
 				<p:column headerText="Status" style="width: 100px" >
-					<h:outputText value="Emitido" />
+					<h:outputText value="#{pedido.status.descricao}" />
 				</p:column>
 				
 				<p:column headerText="Opções" style="text-align: center; width: 100px">
 					<p:button icon="ui-icon-pencil" title="Editar"/>
-				</p:column>
-			
+				</p:column>		
 			</p:dataTable>
-
 		</h:form>
 	</ui:define>
 </ui:composition>

@@ -43,6 +43,13 @@ public class Clientes implements Serializable {
 			throw new NegocioException("Cliente não pode ser excluído.");
 		}
 	}
+	
+	public List<Cliente> porNome(String nome){
+		return this.manager.createQuery("FROM Cliente WHERE upper(nome) like "
+				+ ":nome", Cliente.class)
+				.setParameter("nome", nome.toUpperCase() + "%")
+				.getResultList();
+	}
 
 	public Cliente porDocReceitaFederal(String docReceitaFederal) {
 		try{

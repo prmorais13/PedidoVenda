@@ -4,11 +4,11 @@ public enum StatusPedido {
 
 	ORCAMENTO("Orçamento"), EMITIDO("Emitido"), CANCELADO("Cancelado");
 
+	private String descricao;
+	
 	private StatusPedido(String descricao) {
 		this.descricao = descricao;
 	}
-
-	private String descricao;
 
 	public String getDescricao() {
 		return descricao;

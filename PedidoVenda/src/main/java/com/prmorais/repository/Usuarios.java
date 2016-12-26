@@ -30,7 +30,6 @@ public class Usuarios implements Serializable {
 	
 
 	public Usuario guardar(Usuario usuario) {
-
 		return this.manager.merge(usuario);
 	}
 	
@@ -45,6 +44,11 @@ public class Usuarios implements Serializable {
 		}catch (PersistenceException e){
 			throw new NegocioException("Usuário não pode ser excluído.");
 		}
+	}
+	
+	public List<Usuario> vendedores(){
+		return this.manager.createQuery("FROM Usuario", Usuario.class)
+				.getResultList();
 	}
 
 	public Usuario porEmail(String email) {
