@@ -27,22 +27,13 @@ public class PesquisaClientesBean implements Serializable {
 	private List<Cliente> clientesFiltrados;
 	private Cliente clienteSelecionado;
 	private ClienteFilter filtro;
-
-	private String rotulo;
-	private String mascara;
 	private TipoPessoa tipo;
-
-	public PesquisaClientesBean() {
-		// this.filtro = new ClienteFilter();
-	}
 
 	@PostConstruct
 	public void iniciar() {
 		this.filtro = new ClienteFilter();
-		this.rotulo = "CPF";
-		this.mascara = "999.999.999-99";
 		this.tipo = TipoPessoa.FISICA;
-		
+
 	}
 
 	public void pesquisar() {
@@ -57,6 +48,7 @@ public class PesquisaClientesBean implements Serializable {
 				"Cliente " + this.clienteSelecionado.getDocumentoReceitaFederal() + " excluído com sucesso.");
 	}
 
+	//Preenche o selectOnRadio com os valores do enum TipoPessoa
 	public TipoPessoa[] getTiposPessoa() {
 		return TipoPessoa.values();
 	}
@@ -77,38 +69,29 @@ public class PesquisaClientesBean implements Serializable {
 		return filtro;
 	}
 
-	public String getRotulo() {	
-		if(this.tipo.equals(TipoPessoa.JURIDICA)){
-			this.rotulo = "CNPJ";
-		}else{
-			this.rotulo = "CPF";
-		}
-		return rotulo;
-	}
-
-	public void setRotulo(String rotulo) {
-		this.rotulo = rotulo;
-	}
-
-	public String getMascara() {	
-		if(this.tipo.equals(TipoPessoa.JURIDICA)){
-			this.mascara = "99.999.999/9999-99";
-		}else{
-			this.mascara = "999.999.999-99";
-		}
-		return mascara;
-	}
-
-	public void setMascara(String mascara) {
-		this.mascara = mascara;
-	}
-
 	public TipoPessoa getTipo() {
 		return tipo;
 	}
 
-	public void setTipo(TipoPessoa tipo) {		
+	public void setTipo(TipoPessoa tipo) {
 		this.tipo = tipo;
 	}
 
+	/*Muda o rótulo do inputMask de acordo com a opção escolhida
+	no selectOnRadio*/
+	public String getRotulo() {
+		if (this.tipo.equals(TipoPessoa.JURIDICA)) {
+			return "CNPJ";
+		}
+		return "CPF";
+	}
+
+	/*Muda a mascara do inputmask de acordo com a opção escolhida
+	no selectOnRadio*/
+	public String getMascara() {
+		if (this.tipo.equals(TipoPessoa.JURIDICA)) {
+			return "99.999.999/9999-99";
+		}
+		return "999.999.999-99";
+	}
 }

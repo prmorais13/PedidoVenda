@@ -20,8 +20,8 @@ public class ItemPedido implements Serializable {
 	private static final long serialVersionUID = 1L;
 
 	private Long id;
-	private Integer quantidade;
-	private BigDecimal valorUnitario;
+	private Integer quantidade = 1;
+	private BigDecimal valorUnitario = BigDecimal.ZERO;
 	private Produto produto;
 	private Pedido pedido;
 
@@ -76,6 +76,11 @@ public class ItemPedido implements Serializable {
 	@Transient
 	public BigDecimal getValorTotal() {
 		return this.getValorUnitario().multiply(new BigDecimal(this.getQuantidade()));
+	}
+	
+	@Transient
+	public boolean isProdutoAssociado(){
+		return this.getProduto() != null && this.produto.getId() != null;
 	}
 
 	@Override

@@ -26,23 +26,13 @@ public class CadastroClienteBean implements Serializable {
 	private Endereco endereco;
 	private Cliente cliente;
 	
-	private String rotulo;
-	private String mascara;
-	
 	private String isEdit;
-
-	public CadastroClienteBean() {
-		
-	}
 	
 	@PostConstruct
 	public void iniciar(){
 		if (this.cliente == null) {
 			this.limpar();
 		}
-		
-		this.rotulo = "CPF";
-		this.mascara = "999.999.999-99";
 	}
 
 	public void inicializar() {
@@ -54,9 +44,6 @@ public class CadastroClienteBean implements Serializable {
 
 	public void limpar() {
 		this.cliente = new Cliente();
-		//this.endereco = new Endereco();
-		this.cliente.setTipo(TipoPessoa.FISICA);
-		//this.setIsEdit("nao");
 	}
 	
 	public void novoEndereco(){		
@@ -76,7 +63,6 @@ public class CadastroClienteBean implements Serializable {
 			this.cliente.getEnderecos().add(endereco);
 			this.endereco.setCliente(this.cliente);
 		}
-		//this.endereco = new Endereco();
 	}
 	
 	public void edit(){
@@ -113,32 +99,6 @@ public class CadastroClienteBean implements Serializable {
 
 	public void setEndereco(Endereco endereco) {
 		this.endereco = endereco;
-	}
-	
-	public String getMascara() {
-		if(this.cliente.getTipo().equals(TipoPessoa.JURIDICA)){
-			this.mascara = "99.999.999/9999-99";
-		}else{
-			this.mascara = "999.999.999-99";
-		}
-		return mascara;
-	}
-	
-	public void setMascara(String mascara) {
-		this.mascara = mascara;
-	}
-	
-	public String getRotulo() {
-		if(this.cliente.getTipo().equals(TipoPessoa.JURIDICA)){
-			this.rotulo = "CNPJ";
-		}else{
-			this.rotulo = "CPF";
-		}
-		return rotulo;
-	}
-	
-	public void setRotulo(String rotulo) {
-		this.rotulo = rotulo;
 	}
 
 	public String getIsEdit() {

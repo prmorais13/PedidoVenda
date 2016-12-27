@@ -205,6 +205,23 @@ public class Pedido implements Serializable {
 		
 	}
 
+	public void adicionarItemVazio() {
+		if(this.isOrcamento()){
+			Produto produto = new Produto();
+			
+			ItemPedido item = new ItemPedido();
+			item.setProduto(produto);
+			item.setPedido(this);
+			
+			this.getItens().add(0, item);
+		}
+	}
+	
+	@Transient
+	private boolean isOrcamento() {
+		return StatusPedido.ORCAMENTO.equals(this.getStatus());
+	}
+	
 	@Override
 	public int hashCode() {
 		final int prime = 31;
@@ -230,22 +247,5 @@ public class Pedido implements Serializable {
 		return true;
 	}
 
-	public void adicionarItemVazio() {
-		if(this.isOrcamento()){
-			Produto produto = new Produto();
-			produto.setQuantidadeEstoque(1);
-			
-			ItemPedido item = new ItemPedido();
-			item.setProduto(produto);
-			item.setPedido(this);
-			
-			this.getItens().add(0, item);
-		}
-	}
-
-	@Transient
-	private boolean isOrcamento() {
-		return StatusPedido.ORCAMENTO.equals(this.getStatus());
-	}
 
 }

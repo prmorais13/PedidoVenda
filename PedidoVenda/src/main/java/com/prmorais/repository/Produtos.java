@@ -74,4 +74,9 @@ public class Produtos implements Serializable {
 		return this.manager.find(Produto.class, id);
 	}
 
+	public List<Produto> porNome(String nome) {
+		return this.manager.createQuery("FROM Produto WHERE upper(nome) LIKE :nome", Produto.class)
+				.setParameter("nome", nome.toUpperCase() + "%").getResultList();
+	}
+
 }

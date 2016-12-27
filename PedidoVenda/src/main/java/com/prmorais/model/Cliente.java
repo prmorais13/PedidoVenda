@@ -13,6 +13,7 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.OneToMany;
+import javax.persistence.Transient;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 
@@ -28,7 +29,7 @@ public class Cliente implements Serializable {
 	private String nome;
 	private String email;
 	private String documentoReceitaFederal;
-	private TipoPessoa tipo;
+	private TipoPessoa tipo = TipoPessoa.FISICA;
 	private List<Endereco> enderecos = new ArrayList<>();
 
 	@Id
@@ -92,7 +93,27 @@ public class Cliente implements Serializable {
 	public void setEnderecos(List<Endereco> enderecos) {
 		this.enderecos = enderecos;
 	}
-
+	
+	//Muda o rótulo do inputMask de acordo com a opção escolhida
+	//no selectOnRadio
+	@Transient
+	public String getRotulo(){
+		if(TipoPessoa.FISICA.equals(this.getTipo())){
+			return "CPF";
+		}
+		return "CNPJ";
+	}
+	
+	//Muda a máscara do inputMask de acordo com a opção escolhida
+	//no selectOnRadio
+	@Transient
+	public String getMascara(){
+		if(TipoPessoa.FISICA.equals(this.getTipo())){
+			return "999.999.999-99";
+		}
+		return "99.999.999/9999-99";
+	}
+	
 	@Override
 	public int hashCode() {
 		final int prime = 31;

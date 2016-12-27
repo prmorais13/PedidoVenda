@@ -14,11 +14,11 @@
 	<ui:define name="titulo">#{cadastroPedidoBean.pedido.existente ? 'Edição de pedido' : 'Novo pedido'}</ui:define>
 	
 	<ui:define name="corpo">	
-		<h:form id="frm">
+		<h:form id="frmCadastro" >
 		
 			<h1>#{cadastroPedidoBean.pedido.existente ? 'Edição de pedido' : 'Novo pedido'}</h1>
 			
-			<p:messages closable="true" />	
+			<p:messages id="msgPedido" closable="true" />	
 			
 			<ui:include src="/WEB-INF/template/pedidos/botoesPedido.xhtml" />			
 			

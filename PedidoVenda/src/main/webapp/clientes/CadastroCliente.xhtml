@@ -48,8 +48,8 @@
 					
 				</p:selectOneRadio>
 				
-				<p:outputLabel id="rotulo" value="#{cadastroClienteBean.rotulo}" for="cnpj_cpf" />
-				<p:inputMask id="cnpj_cpf" size="20"  maxlength="20" mask="#{cadastroClienteBean.mascara}"
+				<p:outputLabel id="rotulo" value="#{cadastroClienteBean.cliente.rotulo}" for="cnpj_cpf" />
+				<p:inputMask id="cnpj_cpf" size="20"  maxlength="20" mask="#{cadastroClienteBean.cliente.mascara}"
 					value="#{cadastroClienteBean.cliente.documentoReceitaFederal}" />
 				
 				<p:outputLabel value="E-mail" for="email" />
