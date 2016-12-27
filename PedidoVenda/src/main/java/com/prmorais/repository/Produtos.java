@@ -28,7 +28,6 @@ public class Produtos implements Serializable {
 	private EntityManager manager;
 
 	public Produto guardar(Produto produto) {
-
 		return this.manager.merge(produto);
 	}
 	
@@ -51,7 +50,8 @@ public class Produtos implements Serializable {
 				.setParameter("sku", sku.toUpperCase()).getSingleResult();
 		
 		}catch (NoResultException e) {
-			return null;
+			throw new NegocioException("Produto não encontrado com o SKU informado!");
+			
 		}
 	}
 	

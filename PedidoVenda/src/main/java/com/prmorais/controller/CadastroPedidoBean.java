@@ -73,9 +73,16 @@ public class CadastroPedidoBean implements Serializable {
 	}
 
 	public void salvar() {
-		this.pedido = this.cadastroPedidoService.salvar(this.pedido);
+		this.pedido.removerItemVazio();
+		
+		try{
+			this.pedido = this.cadastroPedidoService.salvar(this.pedido);
 
-		Messages.addGlobalInfo("Pedido salvo com sucesso!");
+			Messages.addGlobalInfo("Pedido salvo com sucesso!");
+		}finally {
+			
+			this.pedido.adicionarItemVazio();
+		}
 	}
 
 	public void recalcularPedido() {
@@ -132,6 +139,19 @@ public class CadastroPedidoBean implements Serializable {
 		return this.clientes.porNome(nome);
 	}
 
+	public void atualizarQuantidade(ItemPedido item, int linha){
+		if(item.getQuantidade() < 1){
+			if(linha == 0){
+				item.setQuantidade(1);
+			}else{
+				this.getPedido().getItens().remove(linha);
+				Messages.addGlobalInfo("Item removido com sucesso!");
+			}	
+		}
+		
+		this.recalcularPedido();
+	}
+	
 	public FormaPagamento[] getFormasPagamento() {
 		return FormaPagamento.values();
 	}

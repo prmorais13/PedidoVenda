@@ -4,7 +4,7 @@
 	xmlns:h="http://java.sun.com/jsf/html"
 	xmlns:p="http://primefaces.org/ui">
 
-	<p:dataTable value="#{cadastroPedidoBean.pedido.itens}" var="item" id="tabelaItens">
+	<p:dataTable value="#{cadastroPedidoBean.pedido.itens}" var="item" id="tabelaItens" rowIndexVar="linha">
 		<p:column headerText="SKU" style="text-align: center; width: 100px" >
 			<h:outputText value="#{item.produto.sku}" rendered="#{item.produtoAssociado}" />
 		
@@ -40,7 +40,11 @@
 		</p:column>
 		
 		<p:column headerText="Quantidade" style="text-align: center; width: 100px" >
-			<p:inputText size="8" value="#{item.quantidade}" />
+			<p:inputText size="8" value="#{item.quantidade}" >
+				<p:ajax event="change" process="@this"
+					update="tabelaItens :frmCadastro:totalPedido :frmCadastro:subtotal :frmCadastro:msgPedido"
+					listener="#{cadastroPedidoBean.atualizarQuantidade(item, linha)}" />
+			</p:inputText>
 		</p:column>
 		
 		<p:column headerText="Estoque" style="text-align: center; width: 100px" >

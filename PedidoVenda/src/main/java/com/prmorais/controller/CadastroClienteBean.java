@@ -64,7 +64,7 @@ public class CadastroClienteBean implements Serializable {
 			this.endereco.setCliente(this.cliente);
 		}
 	}
-	
+
 	public void edit(){
 		setIsEdit("sim");
 	}

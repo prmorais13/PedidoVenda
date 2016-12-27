@@ -217,9 +217,22 @@ public class Pedido implements Serializable {
 		}
 	}
 	
+	public void removerItemVazio() {
+		ItemPedido primeiroItem = this.getItens().get(0);
+		
+		if(primeiroItem != null && primeiroItem.getProduto().getId() == null){
+			this.getItens().remove(0);
+		}
+	}
+	
 	@Transient
 	private boolean isOrcamento() {
 		return StatusPedido.ORCAMENTO.equals(this.getStatus());
+	}
+	
+	@Transient
+	public boolean isValorTotalNegativo() {
+		return this.getValorTotal().compareTo(BigDecimal.ZERO) < 0;
 	}
 	
 	@Override
@@ -246,6 +259,8 @@ public class Pedido implements Serializable {
 			return false;
 		return true;
 	}
+
+
 
 
 }
