@@ -175,20 +175,6 @@ public class Pedido implements Serializable {
 		this.itens = itens;
 	}
 	
-	@Transient
-	public boolean isNovo(){
-		return this.getId() == null;
-	}
-	
-	@Transient
-	public boolean isExistente(){
-		return !this.isNovo();
-	}
-	
-	@Transient
-	public BigDecimal getValorSubtotal(){
-		return this.getValorTotal().subtract(this.getValorFrete()).add(this.getValorDesconto());
-	}
 	
 	public void recalcularValorTotal() {
 		BigDecimal total = BigDecimal.ZERO;
@@ -226,6 +212,21 @@ public class Pedido implements Serializable {
 	}
 	
 	@Transient
+	public boolean isNovo(){
+		return this.getId() == null;
+	}
+	
+	@Transient
+	public boolean isExistente(){
+		return !this.isNovo();
+	}
+	
+	@Transient
+	public BigDecimal getValorSubtotal(){
+		return this.getValorTotal().subtract(this.getValorFrete()).add(this.getValorDesconto());
+	}
+	
+	@Transient
 	private boolean isOrcamento() {
 		return StatusPedido.ORCAMENTO.equals(this.getStatus());
 	}
@@ -233,6 +234,21 @@ public class Pedido implements Serializable {
 	@Transient
 	public boolean isValorTotalNegativo() {
 		return this.getValorTotal().compareTo(BigDecimal.ZERO) < 0;
+	}
+	
+	@Transient
+	public boolean isEmitido() {
+		return this.getStatus().equals(StatusPedido.EMITIDO);
+	}
+	
+	@Transient
+	public boolean isNaoEmissivel() {
+		return !isEmissivel();
+	}
+	
+	@Transient
+	private boolean isEmissivel() {
+		return this.isExistente() && this.isOrcamento();
 	}
 	
 	@Override
@@ -259,6 +275,8 @@ public class Pedido implements Serializable {
 			return false;
 		return true;
 	}
+
+
 
 
 

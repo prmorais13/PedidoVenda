@@ -17,6 +17,7 @@ import javax.validation.constraints.Size;
 
 import org.hibernate.validator.constraints.NotBlank;
 
+import com.prmorais.service.NegocioException;
 import com.prmorais.validation.SKU;
 
 @Entity
@@ -124,6 +125,17 @@ public class Produto implements Serializable {
 	@Override
 	public String toString() {
 		return "Produto [id=" + id + "]";
+	}
+
+	public void baixarEstoque(Integer quantidade) {
+		int novaQuantidade = this.getQuantidadeEstoque() - quantidade;
+		
+		if(novaQuantidade < 0){
+			throw new NegocioException("Não há disponibilidade no estoque de "
+					+ quantidade + " itens do produto " + this.getSku() + "!");
+		}
+		
+		this.setQuantidadeEstoque(novaQuantidade);
 	}
 
 }
