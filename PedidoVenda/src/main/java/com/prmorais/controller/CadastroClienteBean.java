@@ -62,6 +62,10 @@ public class CadastroClienteBean implements Serializable {
 		if(!this.isEdit.equals("sim")){
 			this.cliente.getEnderecos().add(endereco);
 			this.endereco.setCliente(this.cliente);
+		
+			Messages.addGlobalInfo("Endereço adicionado com sucesso! "
+					+ "Clique em Salvar para concluir a adição.");
+			
 		}
 	}
 
@@ -72,8 +76,8 @@ public class CadastroClienteBean implements Serializable {
 	public void removerEndereco(){	
 		this.cliente.getEnderecos().remove(this.endereco);
 		
-		Messages.addGlobalInfo("Endereço removido com sucesso. "
-				+ "Clique em Salvar para concluir a exclusão");
+		Messages.addGlobalInfo("Endereço removido com sucesso! "
+				+ "Clique em Salvar para concluir a remoção.");
 	}
 
 	public TipoPessoa[] getTiposPessoa() {

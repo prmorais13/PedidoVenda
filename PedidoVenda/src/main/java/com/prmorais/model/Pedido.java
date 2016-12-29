@@ -291,10 +291,18 @@ public class Pedido implements Serializable {
 		return true;
 	}
 
-
-
-
-
-
-
+	@Transient
+	private boolean isAlteravel() {
+		return StatusPedido.ORCAMENTO.equals(this.getStatus());
+	}
+	
+	@Transient
+	public boolean isNaoAlteravel() {
+		return !this.isAlteravel();
+	}
+	
+	@Transient
+	public boolean isNaoEnviavelPorEmail(){
+		return this.isNovo() || this.isCancelado();
+	}
 }
