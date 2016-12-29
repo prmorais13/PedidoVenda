@@ -4,6 +4,7 @@ import java.io.Serializable;
 import java.util.List;
 
 import javax.annotation.PostConstruct;
+import javax.enterprise.event.Observes;
 import javax.enterprise.inject.Produces;
 import javax.faces.view.ViewScoped;
 import javax.inject.Inject;
@@ -74,6 +75,10 @@ public class CadastroPedidoBean implements Serializable {
 	private void limpar() {
 		this.pedido = new Pedido();
 		this.pedido.setEnderecoEntrega(new EnderecoEntrega());
+	}
+	
+	public void pedidoAlterado(@Observes PedidoAlteradoEvent event){
+		this.pedido = event.getPedido();
 	}
 
 	public void salvar() {

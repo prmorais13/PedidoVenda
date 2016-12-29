@@ -7,6 +7,7 @@ import javax.inject.Inject;
 import com.prmorais.model.Pedido;
 import com.prmorais.model.StatusPedido;
 import com.prmorais.repository.Pedidos;
+import com.prmorais.util.jpa.Transactional;
 
 public class EmissaoPedidoService implements Serializable{
 	
@@ -21,6 +22,7 @@ public class EmissaoPedidoService implements Serializable{
 	@Inject
 	EstoqueService estoqueService;
 	
+	@Transactional
 	public Pedido emitir(Pedido pedido){
 		pedido = this.cadastroPedidoService.salvar(pedido);
 		
