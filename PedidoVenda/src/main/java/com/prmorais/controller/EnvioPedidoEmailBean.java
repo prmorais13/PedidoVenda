@@ -29,6 +29,7 @@ public class EnvioPedidoEmailBean implements Serializable {
 		MailMessage message = this.mailer.novaMensagem();
 		
 		message.to(this.pedido.getCliente().getEmail())
+			.from("prmorais1302@gmail.com")
 			.subject("Pedido " + this.pedido.getId())
 			.bodyHtml("<strong>Valor Total</strong> " + this.pedido.getValorTotal())
 			.send();
