@@ -1,14 +1,17 @@
 package com.prmorais.controller;
 
 import java.io.Serializable;
+import java.util.Locale;
 
 import javax.enterprise.context.RequestScoped;
 import javax.inject.Inject;
 import javax.inject.Named;
 
+import org.apache.velocity.tools.generic.NumberTool;
 import org.omnifaces.util.Messages;
 
 import com.outjected.email.api.MailMessage;
+import com.outjected.email.impl.templating.velocity.VelocityTemplate;
 import com.prmorais.model.Pedido;
 import com.prmorais.util.mail.Mailer;
 
@@ -29,14 +32,14 @@ public class EnvioPedidoEmailBean implements Serializable {
 		MailMessage message = this.mailer.novaMensagem();
 		
 		message.to(this.pedido.getCliente().getEmail())
-			.from("prmorais1302@gmail.com")
 			.subject("Pedido " + this.pedido.getId())
-			.bodyHtml("<strong>Valor Total</strong> " + this.pedido.getValorTotal())
+			.bodyHtml(new VelocityTemplate(getClass().getResourceAsStream("/emails/pedido.template")))
+			.put("pedido", this.pedido)
+			.put("numberTool", new NumberTool())
+			.put("locale", new Locale("pt", "BR"))
 			.send();
 		
 		Messages.addGlobalInfo("Pedido enviado com sucesso por e-mail!");
-		
-		System.out.println("Enviou");
 	}
 
 }

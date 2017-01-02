@@ -18,7 +18,7 @@ public class Mailer implements Serializable{
 	private SessionConfig config;
 	
 	public MailMessage novaMensagem(){
-		return new MailMessageImpl(this.config);
+		return new MailMessageImpl(this.config).from(this.config.getUsername());
 	}
 
 }
