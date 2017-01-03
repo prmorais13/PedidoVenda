@@ -14,6 +14,7 @@ import com.outjected.email.api.MailMessage;
 import com.outjected.email.impl.templating.velocity.VelocityTemplate;
 import com.prmorais.model.Pedido;
 import com.prmorais.util.mail.Mailer;
+import com.prmorais.util.mail.NovaVelocityTemplate;
 
 @Named
 @RequestScoped
@@ -33,7 +34,7 @@ public class EnvioPedidoEmailBean implements Serializable {
 		
 		message.to(this.pedido.getCliente().getEmail())
 			.subject("Pedido " + this.pedido.getId())
-			.bodyHtml(new VelocityTemplate(getClass().getResourceAsStream("/emails/pedido.template")))
+			.bodyHtml(new NovaVelocityTemplate(getClass().getResourceAsStream("/emails/pedido.template")))
 			.put("pedido", this.pedido)
 			.put("numberTool", new NumberTool())
 			.put("locale", new Locale("pt", "BR"))
