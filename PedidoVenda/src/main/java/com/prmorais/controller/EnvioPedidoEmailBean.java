@@ -11,7 +11,6 @@ import org.apache.velocity.tools.generic.NumberTool;
 import org.omnifaces.util.Messages;
 
 import com.outjected.email.api.MailMessage;
-import com.outjected.email.impl.templating.velocity.VelocityTemplate;
 import com.prmorais.model.Pedido;
 import com.prmorais.util.mail.Mailer;
 import com.prmorais.util.mail.NovaVelocityTemplate;

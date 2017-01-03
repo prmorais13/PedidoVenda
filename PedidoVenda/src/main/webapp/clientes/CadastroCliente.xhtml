@@ -29,6 +29,9 @@
 				</p:toolbarGroup>
 				
 				<p:toolbarGroup align="right">
+					<p:commandButton value="Enviar por e-mail grid" action="#{envioClienteEmailBean.enviarCliente}"
+						process="@this" update="msg" disabled="#{not cadastroClienteBean.editando}" />
+					
 					<p:button value="Pesquisa" outcome="/clientes/PesquisaClientes"/>
 				</p:toolbarGroup>
 			</p:toolbar>

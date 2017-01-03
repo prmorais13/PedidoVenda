@@ -3,6 +3,7 @@ package com.prmorais.controller;
 import java.io.Serializable;
 
 import javax.annotation.PostConstruct;
+import javax.enterprise.inject.Produces;
 import javax.faces.view.ViewScoped;
 import javax.inject.Inject;
 import javax.inject.Named;
@@ -24,6 +25,9 @@ public class CadastroClienteBean implements Serializable {
 	private CadastroClienteService cadastroClienteService;
 
 	private Endereco endereco;
+	
+	@Produces
+	@ClienteEdicao
 	private Cliente cliente;
 	
 	private String isEdit;
