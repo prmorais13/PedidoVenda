@@ -41,7 +41,7 @@
 			<version>3.1.0</version>
 			<scope>provided</scope>
 		</dependency>
-		
+
 		<!-- Implementação Log4j -->
 		<dependency>
 			<groupId>org.apache.logging.log4j</groupId>
@@ -49,22 +49,22 @@
 			<version>2.7</version>
 			<scope>compile</scope>
 		</dependency>
-		
+
 		<dependency>
 			<groupId>org.apache.logging.log4j</groupId>
 			<artifactId>log4j-core</artifactId>
 			<version>2.7</version>
 			<scope>compile</scope>
 		</dependency>
-		
+
 		<dependency>
 			<groupId>org.apache.logging.log4j</groupId>
 			<artifactId>log4j-jcl</artifactId>
 			<version>2.7</version>
 			<scope>compile</scope>
 		</dependency>
-		
-		
+
+
 		<!-- Núcleo do Hibernate -->
 		<dependency>
 			<groupId>org.hibernate</groupId>
@@ -72,14 +72,14 @@
 			<version>5.2.4.Final</version>
 			<scope>compile</scope>
 		</dependency>
-		
+
 		<dependency>
 			<groupId>org.hibernate</groupId>
 			<artifactId>hibernate-entitymanager</artifactId>
 			<version>5.2.4.Final</version>
 			<scope>compile</scope>
 		</dependency>
-		
+
 		<!-- Implementação do Bean Validator -->
 		<dependency>
 			<groupId>org.hibernate</groupId>
@@ -87,7 +87,7 @@
 			<version>5.3.4.Final</version>
 			<scope>compile</scope>
 		</dependency>
-		
+
 		<!-- Implementação MySQL -->
 		<dependency>
 			<groupId>mysql</groupId>
@@ -95,7 +95,7 @@
 			<version>5.1.40</version>
 			<scope>compile</scope>
 		</dependency>
-		
+
 		<!-- Omnifaces(Utilitário para JSF) -->
 		<dependency>
 			<groupId>org.omnifaces</groupId>
@@ -103,7 +103,7 @@
 			<version>2.5.1</version>
 			<scope>compile</scope>
 		</dependency>
-		
+
 		<!-- Commons logging (abstrai a implementação de logging -->
 		<dependency>
 			<groupId>commons-logging</groupId>
@@ -111,7 +111,7 @@
 			<version>1.2</version>
 			<scope>compile</scope>
 		</dependency>
-		
+
 		<!-- Commons lang (utilidades) -->
 		<dependency>
 			<groupId>org.apache.commons</groupId>
@@ -119,7 +119,7 @@
 			<version>3.5</version>
 			<scope>compile</scope>
 		</dependency>
-		
+
 		<!-- Abstração para envio de e-mails -->
 		<dependency>
 			<groupId>com.outjected</groupId>
@@ -127,27 +127,28 @@
 			<version>0.2.5-SNAPSHOT</version>
 			<scope>compile</scope>
 		</dependency>
-		
+
 		<!-- Requerido para envio de e-mails -->
 		<dependency>
 			<groupId>javax.mail</groupId>
 			<artifactId>mail</artifactId>
 			<version>1.5.0-b01</version>
 		</dependency>
-		
+
 		<!-- Usamos para templates de e-mails -->
 		<dependency>
 			<groupId>org.apache.velocity</groupId>
 			<artifactId>velocity</artifactId>
 			<version>1.7</version>
 		</dependency>
-		
+
 		<!-- Usamos para formatar números em templates -->
 		<dependency>
 			<groupId>velocity-tools</groupId>
 			<artifactId>velocity-tools-generic</artifactId>
 			<version>1.4</version>
 		</dependency>
+
 		<dependency>
 			<groupId>com.sendgrid</groupId>
 			<artifactId>sendgrid-java</artifactId>
@@ -158,6 +159,32 @@
 			<artifactId>smtpapi-java</artifactId>
 			<version>1.2.0</version>
 		</dependency>
+
+		<!-- https://mvnrepository.com/artifact/org.springframework.security/spring-security-core -->
+		<dependency>
+			<groupId>org.springframework.security</groupId>
+			<artifactId>spring-security-core</artifactId>
+			<version>4.2.1.RELEASE</version>
+			<scope>compile</scope>
+		</dependency>
+
+
+		<!-- https://mvnrepository.com/artifact/org.springframework.security/spring-security-web -->
+		<dependency>
+			<groupId>org.springframework.security</groupId>
+			<artifactId>spring-security-web</artifactId>
+			<version>4.2.1.RELEASE</version>
+			<scope>compile</scope>
+		</dependency>
+
+		<!-- https://mvnrepository.com/artifact/org.springframework.security/spring-security-config -->
+		<dependency>
+			<groupId>org.springframework.security</groupId>
+			<artifactId>spring-security-config</artifactId>
+			<version>4.2.1.RELEASE</version>
+			<scope>compile</scope>
+		</dependency>
+
 	</dependencies>
 
 	<build>
