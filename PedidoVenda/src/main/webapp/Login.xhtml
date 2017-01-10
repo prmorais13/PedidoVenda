@@ -12,19 +12,24 @@
 	</h:head>
 	
 	<h:body>
+		<f:metadata>
+			<f:event listener="#{loginBean.preRender}" type="preRenderView" />
+		</f:metadata>
 		<div id="login-dialog">
 			<h1>Login</h1>
 			
-			<h:form id="frm">
+			<h:form id="frm" prependId="false">
+				<p:messages id="msg" autoUpdate="true" closable="true" />
+				
 				<h:panelGrid columns="2" styleClass="grid-login">
 					<p:outputLabel value="E-mail" />
-					<p:inputText size="30" />
+					<p:inputText id="username" size="30" value="#{loginBean.email}" />
 					
 					<p:outputLabel value="Senha" />
-					<p:password size="30" />
+					<p:password id="password" size="30" />
 					
 					<h:panelGroup />
-					<p:commandButton value="Login" />
+					<p:commandButton value="Login" action="#{loginBean.Login}" ajax="false" />
 				</h:panelGrid>
 			</h:form>
 		</div>
