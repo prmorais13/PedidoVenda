@@ -25,7 +25,7 @@
 				<p:toolbarGroup>
 					<p:button value="Novo" outcome="/clientes/CadastroCliente" />
 					<p:commandButton value="Salvar" id="botaoSalvar" action="#{cadastroClienteBean.salvar}"
-						process="@this painelCliente" update="@form" />
+						process="@this painelCliente" update="@form" disabled="#{not seguranca.salvarClientePermitido}" />
 				</p:toolbarGroup>
 				
 				<p:toolbarGroup align="right">

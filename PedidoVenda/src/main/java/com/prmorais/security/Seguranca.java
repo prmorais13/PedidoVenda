@@ -54,4 +54,14 @@ public class Seguranca implements Serializable{
 		return this.externalContext.isUserInRole("ADMINISTRADOR")
 				|| this.externalContext.isUserInRole("VENDEDOR");
 	}
+	
+	public boolean isSalvarClientePermitido(){
+		return this.externalContext.isUserInRole("ADMINISTRADOR")
+				|| this.externalContext.isUserInRole("VENDEDOR");
+	}
+	
+	public boolean isExcluirClientePermitido(){
+		return this.externalContext.isUserInRole("ADMINISTRADOR")
+				|| this.externalContext.isUserInRole("VENDEDOR");
+	}
 }

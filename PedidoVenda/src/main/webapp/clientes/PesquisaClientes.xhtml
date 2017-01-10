@@ -68,7 +68,8 @@
 					
 					<p:commandButton icon="ui-icon-trash" title="Excluir"
 						oncomplete="PF('confirmacaoExclusao').show();"
-						process="@this" update=":frm:confirmacaoExclusaoDialog" >
+						process="@this" update=":frm:confirmacaoExclusaoDialog"
+							disabled="#{not seguranca.excluirClientePermitido}" >
 						
 						<f:setPropertyActionListener value="#{cliente}"
 							target="#{pesquisaClientesBean.clienteSelecionado}" />
