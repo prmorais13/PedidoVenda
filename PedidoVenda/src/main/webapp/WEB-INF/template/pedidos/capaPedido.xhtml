@@ -34,7 +34,11 @@
 					var="cliente" itemLabel="#{cliente.nome}" itemValue="#{cliente}" forceSelection="true" />
 			
 			<p:commandButton icon="ui-icon-search" title="Pesquisar" process="@this" update="@none"
-			 	action="#{selecaoClienteBean.abrirDialogo}" disabled="#{cadastroPedidoBean.pedido.naoAlteravel}" />
+			 	action="#{selecaoClienteBean.abrirDialogo}" disabled="#{cadastroPedidoBean.pedido.naoAlteravel}" >
+			 	
+			 	<p:ajax event="dialogReturn" listener="#{cadastroPedidoBean.clienteSelecionado}" update="cliente" />
+			 	
+			 </p:commandButton>
 			
 		</h:panelGroup>
 		

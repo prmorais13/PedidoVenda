@@ -29,6 +29,8 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 		
 		http
 			.csrf().disable()
+			.headers().frameOptions().sameOrigin()
+			.and()
 			
 		.authorizeRequests()
 			.antMatchers("/Login.xhtml", "/Erro.xhtml", "/javax.faces.resource/**").permitAll()

@@ -1,3 +1,4 @@
+<?xml version="1.0" encoding="UTF-8" ?>
 <!DOCTYPE html>
 <html xmlns="http://www.w3.org/1999/xhtml"
 	xmlns:h="http://xmlns.jcp.org/jsf/html"
@@ -6,6 +7,12 @@
 	<title>Seleção de cliente</title>
 
 	<h:outputStylesheet library="css" name="sistema.css" />
+	
+	<style>
+		body{
+			margin: 10px;
+		}
+	</style>
 </h:head>
 <h:body>
 
@@ -19,9 +26,8 @@
 		</div>
 
 		<p:dataTable value="#{selecaoClienteBean.clientesFiltrados}"
-			var="cliente" style="margin-top: 20px"
-			emptyMessage="Nenhum cliente encontrado." rows="10" paginator="true"
-			paginatorAlwaysVisible="false" paginatorPosition="bottom">
+			var="cliente" style="margin-top: 20px" emptyMessage="Nenhum cliente encontrado."
+			rows="10" paginator="true" paginatorAlwaysVisible="false" paginatorPosition="bottom">
 			
 			<p:column headerText="Código" style="text-align: center; width: 40px">
 				<h:outputText value="#{cliente.id}" />
@@ -30,7 +36,8 @@
 				<h:outputText value="#{cliente.nome}" />
 			</p:column>
 			<p:column style="width: 30px; text-align: center">
-				<p:commandButton icon="ui-icon-check" title="Selecionar" />
+				<p:commandButton icon="ui-icon-check" title="Selecionar"
+					action="#{selecaoClienteBean.selecionar(cliente)}" process="@this" />
 			</p:column>
 		</p:dataTable>
 	</h:form>

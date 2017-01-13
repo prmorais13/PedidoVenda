@@ -12,6 +12,7 @@ import javax.inject.Named;
 
 import org.apache.commons.lang3.StringUtils;
 import org.omnifaces.util.Messages;
+import org.primefaces.event.SelectEvent;
 
 import com.prmorais.model.Cliente;
 import com.prmorais.model.EnderecoEntrega;
@@ -72,6 +73,10 @@ public class CadastroPedidoBean implements Serializable {
 		this.recalcularPedido();
 	}
 
+	public void clienteSelecionado(SelectEvent event){
+		this.pedido.setCliente((Cliente) event.getObject());
+	}
+	
 	private void limpar() {
 		this.pedido = new Pedido();
 		this.pedido.setEnderecoEntrega(new EnderecoEntrega());

@@ -4,12 +4,6 @@
 	xsi:schemaLocation="http://xmlns.jcp.org/xml/ns/javaee http://xmlns.jcp.org/xml/ns/javaee/web-facesconfig_2_2.xsd"
 	version="2.2">
 	
-	<factory>
-		<exception-handler-factory>
-			com.prmorais.util.jsf.JsfExceptionHandlerFactory
-		</exception-handler-factory>
-	</factory>
-
 	<application>
 		 <action-listener>
 			org.primefaces.application.DialogActionListener
@@ -28,4 +22,11 @@
 		</locale-config>
 	
 	</application>
+	
+	<factory>
+		<exception-handler-factory>
+			com.prmorais.util.jsf.JsfExceptionHandlerFactory
+		</exception-handler-factory>
+	</factory>
+	
 </faces-config>
