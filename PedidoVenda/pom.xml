@@ -94,6 +94,14 @@
 			<version>5.3.4.Final</version>
 			<scope>compile</scope>
 		</dependency>
+		
+		<!-- Pool de conexões com o c3p0 -->
+		<dependency>
+			<groupId>org.hibernate</groupId>
+			<artifactId>hibernate-c3p0</artifactId>
+			<version>5.2.4.Final</version>
+			<scope>compile</scope>
+		</dependency>
 
 		<!-- Implementação MySQL -->
 		<dependency>
